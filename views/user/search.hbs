@@ -1,0 +1,100 @@
+<!-- Body Content -->
+<div id="page-content">
+    <!-- Collection Banner -->
+    <div class="collection-header">
+
+
+    </div>
+    <!-- End Collection Banner -->
+
+    <div class="container">
+      
+        <div class="row">
+
+
+            <!-- Main Content -->
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 main-col">
+                <div class="productList">
+                    <!-- Toolbar -->
+
+
+                    <!-- Products -->
+                    <div class="grid-products grid--view-items product-five-load-more">
+                        <div class="row">
+                              {{#each search}}
+                            <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3 grid-view-item style2 item">
+                                <div class="grid-view_image">
+                                    <!-- Product Image -->
+                                    <a href="/productdetail/{{this._id}}" class="grid-view-item__link">
+                                        <!-- Image -->
+                                        <img data-src="/product-images/{{this._id}}11.jpg"
+                                            src="/product-images/{{this._id}}11.jpg" alt="image" title="product" />
+                                        <!-- End Image -->
+
+
+                                    </a>
+
+                                    <div class="button-set mobile">
+
+                                        <div>
+                                            <button onclick="addtocart('{{this._id}}')" class="btn btn-dark"><i
+                                                    class="icon an an-shopping-bag"></i></button>
+
+                                            <button onclick="addtowishlist(event,'{{this._id}}')"
+                                                class="btn btn-dark"><i class="icon an an-heart"></i></button>
+                                        </div>
+
+                                    </div>
+                                    <!-- End Product Button -->
+
+
+                                    
+                                </div>
+
+                                                      <div class="product-details text-center">
+                                        <!-- Product Name -->
+                                        <div class="product-name">
+                                            <a href="product-layout1.html">{{this.name}}</a>
+                                        </div>
+                                        <!-- End Product Name -->
+                                        <!-- Product Price -->
+                                        <div class="product-price">
+                                            {{#if this.offer}}
+                                            {{#if this.oldPrize}}
+                                            <span class="old-price">Rs:{{this.oldPrize}}</span>
+                                            {{/if}}
+                                            {{/if}}
+                                            <span class="price">Rs:{{this.price}}</span>
+                                            {{#if this.offer}}
+                                            {{#if this.value}}
+                                            <div class="text text-success"> {{this.value}}% Offer</div>
+                                            {{/if}}
+                                            {{/if}}
+                                        </div>
+                                        <!-- End Product Price -->
+
+                                    </div>
+                            </div>
+                                 {{/each}}
+                        </div>
+                    </div>
+                    <!-- End Products -->
+                       
+                </div>
+
+                <!-- Infinit Pagination -->
+                <div class="infinitpaginOuter">
+                    <div class="infinitpagin-five">
+                        <a href="#" class="btn loadMoreFive">Load More</a>
+                    </div>
+                </div>
+                <!-- End Infinit Pagination -->
+            </div>
+
+
+            <!--End Main Content-->
+        </div>
+
+    </div>
+</div>
+<!-- End Body Content -->

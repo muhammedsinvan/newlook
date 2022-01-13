@@ -1,0 +1,42 @@
+    
+  <section class="container-scroller">
+  <div class="container-fluid page-body-wrapper">
+
+
+{{>admin-sidebar}}
+    
+    
+      <div class="container pt-5">
+            <div class="d-flex mt-5 justify-content-center">
+
+<div class="col-lg-8 mt-5 rounded-3 shadow-lg grid-margin stretch-card" style="border-radius: 30px !important;">
+                <div class="card border-0">
+                  <div class="card-body">
+                    <h1 class="card-title">All Brands</h1>
+                    <table class="table table-hover">
+                      <thead>
+                        <tr>
+                          <th>Logo</th>
+                          <th>Brand</th>
+                          <th>Delete</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {{#each brand}}
+                        <tr>
+                          <td><img src="/product-images/{{this._id}}2.jpg"></td>
+                          <td>{{this.name}}</td>
+
+                          <td><a href="/admin/delete-brand/{{this._id}}"><button class="btn btn-danger">Delete</button></a></td>
+                        </tr>
+                        {{/each}}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+         
+ </div>
+              </div>
+</div>
+</section>

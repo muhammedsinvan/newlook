@@ -1,0 +1,48 @@
+   
+    
+    <section class="container-scroller">
+      <div class="container-fluid page-body-wrapper">
+
+
+{{>admin-sidebar}}
+              <div class="container pt-5">
+            <div class="d-flex mt-5 justify-content-center">
+
+   
+             <div class="col-lg-8 mt-5 rounded-3 shadow-lg grid-margin stretch-card" style="border-radius: 30px !important;">
+                <div class="card border-0">
+                  <div class="card-body" style="overflow-y: auto;">
+                    <h4 class="card-title">Available Coupen</h4>
+                  
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>Coupen Code</th>
+                          <th>Coupen value</th>
+                          <th>Expire date</th>
+                         
+                          <th class="pl-5">   Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {{#each coupen}}
+                        <tr>
+                          <td>{{this.name}}</td>
+                          <td>{{this.value}}</td>
+                          <td>{{this.enddate}}</td>
+                          {{!-- <td>{{this.start}}</td>
+                          <td>{{this.end}}</td> --}}
+                           <td>
+                          <a href="/admin/delete-coupen/{{this._id}}"><button class="btn btn-danger">Delete</button></a>
+                          </td>
+                        </tr>
+                        {{/each}}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+               </div>
+              </div>
+              </div>
+              </section>

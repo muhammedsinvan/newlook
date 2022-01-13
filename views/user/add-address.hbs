@@ -1,0 +1,246 @@
+<section style="min-height: 70vh;">
+                                   <div class="d-flex mt-5 justify-content-center">
+
+    <div class="col-lg-8 mt-5 rounded-2 shadow-lg grid-margin stretch-card" style="border-radius: 25px !important;">
+                        {{!-- <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-3 mb-md-0"> --}}
+                            <div class="create-ac-content mt-5 ml-5 ">
+                               <form action="/add-address" method="post" onsubmit="return validationaddress()">
+                                    <fieldset>
+                                        <h2 class="login-title mb-3">Address Detail</h2>
+                                        <div class="row">
+                                            <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
+                                                <label for="input-firstname">First Name <span class="required-f">*</span></label>
+                                                <input name="firstname" value="" id="inputfirstname" type="text">
+                                                 <p id="namefirst" class="text text-danger"></p>
+                                            </div>
+                                            <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
+                                                <label for="input-lastname">Last Name <span class="required-f">*</span></label>
+                                                <input name="lastname" value="" id="inputlastname" type="text">
+                                                <p id="nametwo" class="text text-danger"></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
+                                                <label for="input-email">E-Mail <span class="required-f">*</span></label>
+                                                <input name="email" value="" id="inputemail" type="email">
+                                                <p id="emailone" class="text text-danger"></p>
+                                            </div>
+                                            <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
+                                                <label for="input-telephone">Number <span class="required-f">*</span></label>
+                                                <input name="number" value="" id="number" type="number">
+                                                <p id="numberone" class="text text-danger"></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                                                <label for="input-company">Apartment/House Name</label>
+                                                <input name="house" value="" id="inputhouse" type="text">
+                                                <p id="houseone" class="text text-danger"></p>
+                                            </div>
+                                            <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
+                                                <label for="input-address-1">Address <span class="required-f">*</span></label>
+                                                <input name="address" value="" id="address" type="text">
+                                                <p id="addressone" class="text text-danger"></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-md-6 col-lg-6 col-xl-6">
+                                                <label for="input-address-2">State <span class="required-f">*</span></label>
+                                                <input name="state" value="" id="inputstate" type="text">
+                                                <p id="stateone" class="text text-danger"></p>
+                                            </div>
+                                            <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
+                                                <label for="input-city">City <span class="required-f">*</span></label>
+                                                <input name="city" value="" id="inputcity" type="text">
+                                                <p id="cityone" class="text text-danger"></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
+                                                <label for="input-postcode">Post Code <span class="required-f">*</span></label>
+                                                <input name="postcode" value="" id="postcode" type="text">
+                                                <p id="postone" class="text text-danger"></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-md-12 col-lg-12 col-xl-12">
+                                                <div class="customCheckbox cart_tearm">
+                                                    
+                                                    <input type="text" name="userid" id="" value="{{user._id}}" hidden >
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="row">
+                                            <div class="form-group col-md-12 col-lg-12 col-xl-12 mb-0">
+                                                
+                                            </div>
+
+                                        <div class="order-button-payment">
+                                            <button type="submit"class="btn">Add Address</button>
+                                        </div>
+                                        </div>
+                                    </fieldset>
+                               </form>
+                            </div>
+                        </div>
+                        </div>
+                    
+</section>
+
+                    <script>
+                        function validationaddress() {
+  var CustomerFirstName = document.getElementById("inputfirstname").value;
+  var CustomerLastName = document.getElementById("inputlastname").value;
+  var emailAddresse = document.getElementById("inputemail").value;
+  var phonenumber = document.getElementById("number").value;
+  var house = document.getElementById("inputhouse").value;
+  var address = document.getElementById("address").value;
+  var state = document.getElementById("inputstate").value;
+  var city = document.getElementById("inputcity").value;
+  var postcode = document.getElementById("postcode").value;
+
+
+  if (CustomerFirstName == "") {
+    document.getElementById("namefirst").innerHTML =
+      "Please enter your name";
+    return false;
+  }
+  if (CustomerFirstName.length <= 2 || CustomerFirstName.length > 20) {
+    document.getElementById("namefirst").innerHTML =
+      " The length is to short ";
+    return false;
+  }
+  if (!isNaN(CustomerFirstName)) {
+    document.getElementById("namefirst").innerHTML =
+      " Enter the valid characters";
+    return false;
+  }
+
+
+
+  if (CustomerLastName == "") {
+    document.getElementById("nametwo").innerHTML =
+      " Please Enter your last name";
+    return false;
+  }
+  if (CustomerLastName.length <= 2 || CustomerLastName.length > 20) {
+    document.getElementById("nametwo").innerHTML =
+      "Please enter more than 2 characters and shorter than 20 characters";
+    return false;
+  }
+  if (!isNaN(CustomerLastName)) {
+    document.getElementById("nametwo").innerHTML =
+      " Only enter characters";
+    return false;
+  }
+
+  if (emailAddresse == "") {
+    document.getElementById("emailone").innerHTML =
+      " Please fill the fieled";
+    return false;
+  }
+
+  if (emailAddresse.indexOf("@") <= 0) {
+    document.getElementById("emailone").innerHTML = " ** Invalid Email";
+    return false;
+  }
+
+  if (
+    emailAddresse.charAt(emailAddresse.length - 4) != "." &&
+    emailAddresse.charAt(emailAddresse.length - 3) != "."
+  ) {
+    document.getElementById("emailone").innerHTML = " ** Invalid Email";
+    return false;
+  }
+
+  
+  if (phonenumber == "") {
+    document.getElementById("numberone").innerHTML =
+      "Please enter your number";
+    return false;
+  }
+  if (phonenumber.length <= 2 || phonenumber.length > 20) {
+    document.getElementById("numberone").innerHTML =
+      " The length is to short ";
+    return false;
+  }
+  if (isNaN(phonenumber)) {
+    document.getElementById("numberone").innerHTML =
+      " Enter the valid numbers";
+    return false;
+  }
+
+
+  if (house == "") {
+    document.getElementById("houseone").innerHTML =
+      "Please enter your name";
+    return false;
+  }
+  if (house.length <= 2 || house.length > 20) {
+    document.getElementById("houseone").innerHTML =
+      " The length is to short ";
+    return false;
+  }
+  if (!isNaN(house)) {
+    document.getElementById("houseone").innerHTML =
+      " Enter the valid characters";
+    return false;
+  }
+
+
+   if (address == "") {
+    document.getElementById("addressone").innerHTML =
+      "Please enter your name";
+    return false;
+  }
+  if (address.length <= 2 || address.length > 1000) {
+    document.getElementById("addressone").innerHTML =
+      " The length is to short ";
+    return false;
+  }
+  if (!isNaN(address)) {
+    document.getElementById("addressone").innerHTML =
+      " Enter the valid characters";
+    return false;
+  }
+
+
+   if (state == "") {
+    document.getElementById("stateone").innerHTML =
+      "Please enter your name";
+    return false;
+  }
+  if (state.length <= 2 || state.length > 20) {
+    document.getElementById("stateone").innerHTML =
+      " The length is to short ";
+    return false;
+  }
+  if (!isNaN(state)) {
+    document.getElementById("stateone").innerHTML =
+      " Enter the valid characters";
+    return false;
+  }
+
+
+   if (city == "") {
+    document.getElementById("cityone").innerHTML =
+      "Please enter your name";
+    return false;
+  }
+  if (city.length <= 2 || city.length > 20) {
+    document.getElementById("cityone").innerHTML =
+      " The length is to short ";
+    return false;
+  }
+  if (!isNaN(city)) {
+    document.getElementById("cityone").innerHTML =
+      " Enter the valid characters";
+    return false;
+  }
+
+
+
+
+}
+                    </script>

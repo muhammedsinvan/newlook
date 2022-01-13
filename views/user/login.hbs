@@ -1,0 +1,86 @@
+
+            <!-- Body Content -->
+            <div id="page-content">
+                <!-- Page Title -->
+                <div class="page section-header text-center mb-0">
+                    <div class="page-title">
+                        <div class="wrapper"><h1 class="page-width">Login</h1></div>
+                    </div>
+                </div>
+                <!-- End Page Title -->
+                <!-- Breadcrumbs -->
+                <div class="bredcrumbWrap bredcrumbWrapPage bredcrumb-style2 text-center">
+                    <div class="container breadcrumbs">
+                        <a href="index.html" title="Back to the home page">Home</a><span aria-hidden="true">|</span><span class="title-bold">Login</span>
+                    </div>
+                </div>
+                
+                <!-- End Breadcrumbs -->
+<form onsubmit="return loginvalidation()" action="/login" method="post" >
+                <div class="container">
+                    <div class="row">
+                        <!-- Main Content -->
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-6 box mb-4 mb-md-0">
+
+                            <h3>New Customers</h3>
+                            <p>By creating an account with our store, you will be able to move through the checkout process faster, store multiple shipping addresses, view and track your orders in your account and more.</p>
+                            <a href="/user/signup" class="btn">Create an account</a>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-6 box">
+                            <div class="mb-4">
+                                <form method="post" action="#" id="CustomerRegisterForm" accept-charset="UTF-8" class="customer-form">	
+                                    <h3>Registered Customers</h3>
+                                    <p>If you have an account with us, please log in.</p>
+
+
+                                    {{#if loginErr}}
+                                    <h5 class="text-danger">Plese check the detail you have entered</h5>
+                                    {{/if}}
+                                    {{#if email}}
+                                    <p>no</p>
+                                    {{/if}}
+
+
+                                    <div class="row">
+                                        <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                                            <div class="form-group">
+                                                <label for="CustomerEmail">Email <span class="required">*</span></label>
+                                                <input type="email" name="email" placeholder="" id="CustomerEmail"/>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                                            <div class="form-group">
+                                                <label for="CustomerPassword"  >Password <span class="required">*</span></label>
+                                                <input type="password" name="password" placeholder="" id="CustomerPassword" class="">                        	
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="text-left col-12 col-sm-12 col-md-12 col-lg-12 ms-5 ">
+                                            <input type="submit" class="btn mb-3 mt-3" value="Sign In">
+                                          {{!-- <a href="/phonelogin">  <input type="submit" class="btn mb-3" value=""></a> --}}
+                                         
+                                          <a href="/phonelogin" class="btn btn-dark">Login With Otp</a>
+                                         
+                                            <p class="mb-4">
+                                                <a href="/phonelogin">Login With Otp</a> &nbsp; | &nbsp;
+                                                <a href="/user/signup" id="customer_register_link">Create account</a>
+                                            </p>
+                                            
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- End Main Content -->
+                    </div>
+                </div>
+                </form>
+            </div>
+            <!-- End Body Content -->
+                        <!-- Scoll Top -->
+            <div id="site-scroll"><i class="icon an an-angle-up"></i></div>
+            <!-- End Scoll Top -->
+
+
+            

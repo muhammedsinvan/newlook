@@ -1,0 +1,75 @@
+<section class="container-scroller">
+  <div class="container-fluid page-body-wrapper">
+
+
+    {{>admin-sidebar}}
+
+
+
+    <div class="container pt-5">
+      <div class="d-flex mt-5 justify-content-center">
+
+        <div class="col-lg-8 mt-5 rounded-3 shadow-lg grid-margin stretch-card" style="border-radius: 30px !important;">
+          <div class="card  border-0 ">
+            <div class="card-body ">
+              <h4 class="card-title ">Product Offer Management</h4>
+              <p class="card-description"> Enter the detail</p>
+              <form action="/admin/add-prooffer" method="post">
+
+                <div class="form-group">
+                  {{!-- {{#if proOfferExists}}
+                  <h6 class="text text-danger">The product offer is already exist</h6>
+                  {{/if}} --}}
+                  <label for="exampleInputPassword1">Enter the product name</label>
+                  <input type="text" class="form-control" id="exampleInputproduct" placeholder="Name of product"
+                    name="prooffer">
+                </div>
+                <br>
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Offer Value</label>
+                  <input type="number" class="form-control" id="exampleInputPassword1" placeholder="offer value"
+                    name="value">
+                </div>
+
+                <div class="col-md-4">
+                  <label for="">Expire date</label>
+
+                  <input type="date" class="border form-control" name="enddate" id="enddate">
+                </div>
+
+                <button type="submit" class="btn btn-gradient-primary mt-5 ">Submit</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  </form>
+
+
+</section>
+
+    <script>
+        $(function () {
+            var dtToday = new Date();
+
+            var month = dtToday.getMonth() + 1;
+            var day = dtToday.getDate();
+            var year = dtToday.getFullYear();
+            if (month < 10)
+                month = '0' + month.toString();
+            if (day < 10)
+                day = '0' + day.toString();
+
+            var maxDate = year + '-' + month + '-' + day;
+
+            // or instead:
+            // var maxDate = dtToday.toISOString().substr(0, 10);
+
+
+            $('#enddate').attr('min', maxDate);
+        });
+    </script>

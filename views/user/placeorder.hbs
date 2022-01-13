@@ -1,0 +1,296 @@
+<!-- Body Content -->
+<section style="min-height: 70vh;">
+    <div id="page-content">
+        <!-- Page Title -->
+        <div class="page section-header text-center">
+            <div class="page-title">
+                <div class="wrapper">
+                    <h1 class="page-title">Checkout </h1>
+                </div>
+            </div>
+        </div>
+        <!-- End Page Title -->
+
+        <div class="container">
+            <div class="row">
+                <!-- Main Content -->
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-3">
+                    <div class="customer-box returning-customer">
+                        <h3><i class="icon an an-user"></i> If you have address ? <a href="#customer-login"
+                                id="customer" class="text-white" data-bs-toggle="collapse">Select the address </a></h3>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-3">
+                    <div class="customer-box customer-coupon">
+                        <h3 class="font-15 xs-font-13"><i class="icon an an-gift"></i> <a href="#have-coupon"
+                                class="text-white" data-bs-toggle="collapse">Select your payment paymentmethod</a></h3>
+
+                    </div>
+                </div>
+            </div>
+            <form action="" id="checkout-formee" onsubmit="return Validationplaceorder()">
+                <div class="row billing-fields">
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-3 mb-md-0">
+                        <div class="create-ac-content">
+
+                            <fieldset>
+                                <h2 class="login-title mb-3">Saved Address</h2>
+                                <div>
+                                    <a class="btn  kms mt-auto " href="/add-addressplace" style=" width: 200px;">
+                                        Add Address
+                                    </a>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-md-12 col-lg-12 col-xl-12 mb-0">
+                                        {{#each address}}
+                                        <div class="row ">
+
+                                            <div class="col-md-12 mt-5 alert border-warning mr-2 card"
+                                                style="cursor: pointer;">
+
+                                                <div class="col-md-12 d-flex flex-column" style="height: fit-content;">
+                                                    <input type="radio" id="address2" name="address2" checked
+                                                        value="{{this._id}}">
+                                                    <h6 class="">{{this.firstname}} {{this.lastname}}</h6>
+                                                    <p class="">{{this.house}},{{this.city}} - {{this.postcode}}<br>Ph :
+                                                        {{this.number}}</p>
+                                                    <div class=" mt-auto ">
+                                                        <a class="btn  kms mt-auto "
+                                                            href="/edit-addressplace/{{this._id}}"
+                                                            style=" width: 200px;">
+                                                            Edit
+                                                        </a>
+                                                        <a class="btn btn-danger mt-auto"
+                                                            href="/delete-addressplace/{{this._id}}"
+                                                            style="width: 200px; color: rgb(250, 250, 250);"
+                                                            name="{{this.brand}}" onclick="deleteAddress(event)">
+                                                            Delete
+                                                        </a>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        {{/each}}
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                        </div>
+                    </div>
+
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                        <div class="your-order-payment">serviceid
+                            <div class="your-order">
+                                <h2 class="order-title mb-4">Your Order</h2>
+                                <div class="table-responsive-sm order-table">
+                                    <table class="bg-white table table-bordered table-hover text-center">
+                                        <thead>
+                                            <tr>
+                                                <th>Product</th>
+                                                <th class="text-start">Name</th>
+                                                <th>Price</th>
+                                                <th>Size</th>
+                                                <th>Qty</th>
+                                                {{!-- <th>Subtotal</th> --}}
+                                            </tr>
+                                        </thead>
+                                        {{#each products}}
+                                        <tbody>
+                                            <tr>
+                                                <td><img src="/product-images/{{this.product._id}}11.jpg" alt=""
+                                                        style="height: auto; width: 50px;"></td>
+                                                <td class="text-start">{{this.product.name}}</td>
+                                                <td>{{this.product.price}}</td>
+                                                <td>{{this.product.size}}</td>
+                                                <td>{{this.quantity}}</td>
+                                                {{!-- <td></td> --}}
+                                            </tr>
+
+                                        </tbody>
+                                        {{/each}}
+                                        <tfoot class="font-weight-600">
+                                            <tr>
+                                                <td colspan="4" class="text-end">Shipping </td>
+                                                <td>Free Shipping</td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="4" class="text-end">Total</td>
+                                                <td>Rs:<span>{{total}}</span></td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <hr>
+
+                            <div class="your-payment">
+                                <h2 class="payment-title mb-3">payment method</h2>
+                                <div class="payment-method">
+                                    <div class="payment-accordion">
+                                        <div id="accordion" class="payment-section">
+                                            <div class="card mb-2">
+                                                <input type="radio" id="cod" name="paymentmethod" value="cod" checked >Cash On
+                                                Delivery<br>
+                                                <hr>
+                                                <input type="radio" id="online" name="paymentmethod"
+                                                    value="online">Online Payment<br>
+                                                <hr>
+                                                <input type="radio" id="paypal" name="paymentmethod"
+                                                    value="paypal">Paypal<br>
+                                            </div>
+                                            <div class="card mb-2">
+                                                <div id="collapseFour" class="collapse" data-parent="#accordion">
+                                                    <div class="card-body">
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="order-button-payment">
+                            <button type="submit" href="" class="btn">Place order</button>
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+            <!--End Main Content-->
+        </div>
+
+    </div>
+    <!-- End Body Content -->
+</section>
+<script>
+
+
+    $("#checkout-formee").submit((e) => {
+        e.preventDefault()
+        $.ajax({
+            url: '/checkout',
+            method: 'post',
+            data: $("#checkout-formee").serialize(),
+            success: (response) => {
+                if (response.codsuccess) {
+                    location.href = "/sucess"
+                } else if (response.RazorpaySuccess) {
+                    razorpaypayment(response.response)
+                    console.log("json result")
+                } else {
+                    location.href = response.url
+                }
+            }
+        })
+    })
+
+    function razorpaypayment(order) {
+        console.log(order)
+        console.log("json result2")
+        var options = {
+            "key": "rzp_test_kbEsZN8D8TcvTh", // Enter the Key ID generated from the Dashboard       
+            "amount": order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+            "currency": "INR",
+            "name": "New Look",
+            "description": "Test Transaction",
+            "image": "assets/images/original-2021NLFLOGORGB.png",
+            "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+            "handler": function (response) {
+
+                verifypayment(response, order)
+            },
+            "prefill": {
+                "name": "muhammed sinvan",
+                "email": "sinvan@gmail.com",
+                "contact": "6238454944"
+            },
+            "notes": {
+                "address": "Razorpay Corporate Office"
+            },
+            "theme": {
+                "color": "#3399cc"
+            }
+        };
+        var rzp1 = new Razorpay(options);
+        rzp1.open();
+    }
+
+    function verifypayment(payment, order) {
+        console.log("json result 3 verifypaymen")
+        $.ajax({
+            url: '/verify-payment',
+            data: {
+                payment,
+                order
+            },
+            method: 'post',
+            success: (response) => {
+                if (response.status) {
+                    location.href = "/sucess"
+                } else {
+                    alert('payment failed')
+                }
+            }
+        })
+    }
+</script>
+
+
+
+<script>
+    function Validationplaceorder() {
+
+        console.log("validation function caled")
+
+        let firstname = document.getElementById('inputfirstname').value
+        let lastname = document.getElementById('inputlastname').value
+        let email = document.getElementById('inputemail').value
+        let number = document.getElementById('number').value
+        let house = document.getElementById('inputhouse').value
+        let address = document.getElementById('address').value
+        let state = document.getElementById('inputstate').value
+        let city = document.getElementById('inputcity').value
+        let post = document.getElementById('postcode').value
+
+        if (firstname == "") {
+
+            document.getElementById('namefirst').innerHTML = "Plese fill the field"
+            return false;
+        } else if (lastname == "") {
+            document.getElementById('nametwo').innerHTML = 'Enter the field'
+            return false;
+        } else if (email == "") {
+            document.getElementById('emailone').innerHTML = 'Enter the field'
+            return false;
+        } else if (number == "") {
+            document.getElementById('numberone').innerHTML = "Enter the field"
+            return false;
+        } else if (house == "") {
+            document.getElementById('houseone').innerHTML = "Enter the field"
+            return false;
+        } else if (address == "") {
+            document.getElementById('addressone').innerHTML = "Enter the field"
+            return false;
+
+        } else if (state == "") {
+            document.getElementById('stateone').innerHTML = "Enter the field"
+            return false;
+        } else if (city == "") {
+            document.getElementById('cityone').innerHTML = "Enter the field"
+            return false;
+        } else if (post == "") {
+            document.getElementById('postone').innerHTML = "Enter the field"
+            return false;
+        } else
+      }
+</script>

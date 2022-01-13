@@ -1,0 +1,167 @@
+<div class="col-12 col-sm-12 col-md-3 col-lg-3 sidebar filterbar">
+    <div class="closeFilter d-block d-md-block d-lg-none"><i class="icon an an-times"></i></div>
+    <div class="sidebar_tags">
+        <!-- Categories -->
+        <div class="sidebar_widget filterBox categories filter-widget">
+            <div class="widget-title">
+                <h2>Categories</h2>
+            </div>
+            <div class="widget-content">
+                <ul class="sidebar_categories">
+
+                    <li class="level1 sub-level"><a href="#" class="site-nav">Catagory</a>
+                        <ul class="sublinks">
+                            {{#each catagory}}
+                            <li class="level2"><a href="/get-catagory-products/{{this.name}}"
+                                    class="site-nav">{{this.name}}</a></li>
+                            {{/each}}
+                        </ul>
+                    </li>
+
+
+                    <li class="level1 sub-level"><a href="#" class="site-nav">Sub Catogory</a>
+                        <ul class="sublinks">
+                            {{#each subcatagorys}}
+                            <li class="level2"><a href="/get-subcatagory-products/{{this}}"
+                                    class="site-nav">{{this}}</a></li>
+                            {{/each}}
+                        </ul>
+                    </li>
+                    {{!-- <li class="lvl-1"><a href="" class="site-nav">Shoes</a></li>
+                    <li class="lvl-1"><a href="#" class="site-nav">Accessories</a></li>
+                    <li class="lvl-1"><a href="#" class="site-nav">Collections</a></li>
+                    <li class="lvl-1"><a href="#" class="site-nav">Sale</a></li>
+                    <li class="lvl-1"><a href="#" class="site-nav">Page</a></li> --}}
+                </ul>
+            </div>
+        </div>
+        <!-- End Categories -->
+        <!-- End Size Swatches -->
+
+        <!-- Color Swatches -->
+        <div class="sidebar_widget filterBox filter-widget">
+
+            <div class="widget-title">
+                <h2>Color</h2>
+            </div>
+
+            <div class="filter-color swacth-list widget-content clearfix" data-type="{{type}}">
+                <ul>
+                    {{#each color}}
+                    <button onclick="filter(event)"> <span class="swacth-btn border filter-clr-btn "
+                            data-bs-toggle="tooltip" data-bs-placement="top" title="{{this}}"
+                            data-color="{{this}}"></span></button>
+                    {{/each}}
+
+                </ul>
+            </div>
+        </div>
+        <!-- End Color Swatches -->
+        {{!-- <div class="sidebar_widget filterBox filter-widget">
+            <div class="col-4 col-md-4 col-lg-4 d-flex justify-content-end align-items-center text-end">
+                <div class="filters-toolbar__item">
+                    <select name="SortBy" id="SortBy" class="filters-toolbar__input filters-toolbar__input--sort">
+                        <option value="title-ascending" selected="selected">Sort</option>
+                        <a href="/sort">
+                            <option>Alphabetically, A-Z
+                        </a></option>
+                        <option>Alphabetically, Z-A</option>
+                        <option>Price, low to high</option>
+                        <option>Price, high to low</option>
+                        <option>Date, new to old</option>
+                        <option>Date, old to new</option>
+                    </select>
+                    <input class="collection-header__default-sort" type="hidden" value="manual">
+                </div>
+            </div>
+
+        </div> --}}
+        <div class="sort-filter sidebar_widget filterBox categories filter-widget" data-type="{{type}}">
+
+
+            <ul class="sidebar_categories">
+
+                <li class="level1 sub-level"><a href="#" class="site-nav">Sort</a>
+                    <ul class="sublinks">
+
+
+                        <button onclick="sortalpha(event)">
+                            <li class="level2"><a class="site-nav">Alphabetically, A-Z</a></li>
+                        </button>
+                        <button onclick="sortalphaz(event)">
+                            <li class="level2"><a 
+                                    class="site-nav">Alphabetically, Z-A</a></li>
+                        </button>
+                        <button onclick="sortnuml(event)">
+                            <li class="level2"><a  class="site-nav">Price,
+                                    low to high</a></li>
+                        </button>
+                        <button onclick="sortnumh(event)">
+                            <li class="level2"><a class="site-nav">Price,
+                                    high to low</a></li>
+                        </button>
+
+                    </ul>
+                </li>
+
+
+
+
+
+
+        </div>
+    </div>
+
+
+
+</div>
+
+<script>
+    const colors = [...document.getElementsByClassName('filter-clr-btn')]
+    for (x of colors) {
+        color = x.title
+        console.log(color)
+        x.style.backgroundColor = color
+    }
+
+
+
+
+    function filter(event) {
+        const type = document.querySelector('.filter-color').getAttribute('data-type')
+        const color = event.target.getAttribute('data-color')
+        location = `/color-product/${color}/${type}`
+
+    }
+
+
+
+
+    function sortalpha(event) {
+        const types = document.querySelector('.sort-filter').getAttribute('data-type')
+        console.log(types)
+        location = `/sort-producta/${types}`
+    }
+
+
+       function sortalphaz(event) {
+        const types = document.querySelector('.sort-filter').getAttribute('data-type')
+        console.log(types)
+        location = `/sort-productz/${types}`
+    }
+
+           function sortnuml(event) {
+        const types = document.querySelector('.sort-filter').getAttribute('data-type')
+        console.log(types)
+        location = `/sort-producto/${types}`
+    }
+
+           function sortnumh(event) {
+        const types = document.querySelector('.sort-filter').getAttribute('data-type')
+        console.log(types)
+        location = `/sort-producth/${types}`
+    }
+
+
+</script>
+

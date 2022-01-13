@@ -1,0 +1,252 @@
+<section class="template-index diva home14">
+    <!-- Page Loader -->
+    <div id="pre-loader"><img src="assets/images/newlook.jpeg" alt="Loading..." /></div>
+    <!-- End Page Loader -->
+
+    <!-- Page Wrapper -->
+    <div class="pageWrapper">
+
+  
+        <!-- Search Form Drawer -->
+        <div class="search">
+            <div class="search__form">
+                <form class="search-bar__form" action="/search-produts" >
+                    <button class="go-btn search__button" type="submit"><i class="icon an an-search"></i></button>
+                    <input class="search__input" type="search" name="search" value="" placeholder="Search entire store..."
+                        aria-label="Search" autocomplete="off" />
+                </form>
+                <button type="button" class="search-trigger close-btn" data-bs-toggle="tooltip" data-bs-placement="left"
+                    title="Close"><i class="icon an an-times"></i></button>
+            </div>
+        </div>
+        <!-- End Search Form Drawer -->
+
+        <!-- Main Header -->
+        <div class="header-section clearfix animated hdr-sticky">
+            <!-- Desktop Header -->
+            <div class="header-8 classic-style">
+                <!-- Top Header -->
+                <div class="top-header d-lg-none">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-10 col-sm-8 col-md-7 col-lg-4">
+                                <p class="phone-no float-start"><i class="icon an an-phone me-1"></i><a
+                                        href="tel:+91 6238454944">+91 6238454944</a></p>
+                            </div>
+
+                            <div
+                                class="col-2 col-sm-4 col-md-5 col-lg-4 text-end d-block d-sm-none d-md-none d-lg-none">
+                                <!-- Mobile User Links -->
+                                <div class="user-menu-dropdown">
+                                    <span class="user-menu"><i class="an an-user-alt"></i></span>
+                                    <ul class="customer-links list-inline" style="display:none;">
+                                         {{#if user}}
+                                         <li class="item"><a href="/profile">My Profile</a></li>
+                                            <li class="item"><a href="/logout">Logout</a></li>
+                                             <li class="item"><a href="/order-history">Orders</a></li>
+
+                                            {{else}}
+                                            <li class="item"><a href="/user/login">Login</a></li>
+                                            <li class="item"><a href="/user/signup">Register</a></li>
+                                            {{/if}}
+                                    </ul>
+                                </div>
+                                
+                                <!-- End Mobile User Links -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Top Header -->
+
+                <!-- Header -->
+                <div class="header-wrap d-flex">
+                    <div class="container">
+                        <div class="row align-items-center">
+                            <div class="col-4 col-sm-4 col-md-5 col-lg-4 d-block d-lg-none">
+                                <button type="button"
+                                    class="btn--link site-header__menu js-mobile-nav-toggle mobile-nav--open"
+                                    data-bs-toggle="tooltip" data-bs-placement="bottom" title="Menu"><i
+                                        class="icon an an-times"></i><i class="icon an an-bars"></i></button>
+                                <!-- Mobile Search -->
+                                <div class="site-header__search d-block d-lg-none mobile-search-icon">
+                                    <button type="button" class="search-trigger" data-bs-toggle="tooltip"
+                                        data-bs-placement="bottom" title="Search"><i
+                                            class="icon an an-search"></i></button>
+                                </div>
+                                <!-- End Mobile Search -->
+                            </div>
+
+                            <!-- Desktop Logo -->
+                            <div class="logo col-4 col-sm-4 col-md-2 col-lg-4 col-xl-4 align-self-center">
+                                <a href="index.html"><img src="assets/images/original-2021NLFLOGORGB.png" width="90"
+                                        alt="assets/images/original-2021NLFLOGORGB.png"
+                                        title="New Look Multipurpose Html Template" /></a>
+                            </div>
+                            <!-- End Desktop Logo -->
+
+                            <!-- Search -->
+                            <div class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 main-search d-none d-lg-block">                             
+                                <div class="site-header__search search-bar-inline">
+                                    <form action="/search-produts" class="search-bar__form d-flex position-relative">
+                                        <input class="search__input" type="search" name="search"
+                                            placeholder="Search Your Fashion..." aria-label="Search"
+                                            autocomplete="off" />
+                                        <button class="go-btn search__button" type="submit"><i
+                                                class="icon an an-search"></i></button>
+                                    </form>
+                                </div>                       
+                            </div>
+                            <!-- End Search -->
+
+                            <!-- Right Side -->
+                            <div class="col-4 col-sm-4 col-md-5 col-lg-4 col-xl-4">
+                                <div class="right-action d-flex-align-center justify-content-end">
+                                    <!-- Search -->
+                                    <div class="item site-header__search d-none d-lg-none">
+                                        <button type="button" class="search-trigger" data-bs-toggle="tooltip"
+                                            data-bs-placement="bottom" title="Search"><i
+                                                class="icon an an-search"></i></button>
+                                    </div>
+                                    <!-- End Search -->
+                                    <!-- User Links -->
+                                    <div class="item user-menu-dropdown d-none d-sm-block d-md-block d-lg-block">
+                                        <span class="user-menu" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                            title="Account"><i class="icon an an-user-alt"></i></span>
+                                        <ul class="customer-links list-inline" style="display:none;">
+
+
+                                            {{#if user}}
+                                            <li class="item"><a href="/profile">My Profile</a></li>
+                                            <li class="item"><a href="/logout">Logout</a></li>
+                                             <li class="item"><a href="/order-history">Orders</a></li>
+                                            {{else}}
+                                            <li class="item"><a href="/user/login">Login</a></li>
+                                            <li class="item"><a href="/user/signup">Register</a></li>
+                                            {{/if}}
+                                        </ul>
+                                    </div>
+                                    <!-- End User Links -->
+                                    <!-- Wishlist -->
+                                    {{#if user}}
+                                    <div class="item site-header-wishlist">
+                                        <a href="/wishlist" class="wishlist-trigger" data-bs-toggle="tooltip"
+                                            data-bs-placement="bottom" title="Wishlist">
+                                            <i class="icon an an-heart"></i>
+                                        </a>
+                                    </div>
+                                    {{else}}
+                                      <div class="item site-header-wishlist">
+                                        <a href="/user/login" class="wishlist-trigger" data-bs-toggle="tooltip"
+                                            data-bs-placement="bottom" title="Wishlist">
+                                            <i class="icon an an-heart"></i>
+                                        </a>
+                                    </div>
+                                    {{/if}}
+                                    <!-- End Wishlist -->
+                                    <!-- Minicart -->
+
+                                    {{#if user}}
+                                    <div class="item site-header-wishlist">
+                                        <a href="/cart" class="wishlist-trigger" data-bs-toggle="tooltip"
+                                            data-bs-placement="bottom" title="Cart">
+                                            <i class="icon an an-shopping-bag"></i>
+                                            <span
+                                                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success " id="cart-count">
+                                                {{cartcount}}
+                                                <span class="visually-hidden">unread messages</span>
+                                            </span>
+                                        </a>
+                                    </div>
+                                    {{else}}
+                                     <div class="item site-header-wishlist">
+                                        <a href="/user/login" class="wishlist-trigger" data-bs-toggle="tooltip"
+                                            data-bs-placement="bottom" title="Cart">
+                                            <i class="icon an an-shopping-bag"></i>
+                                        </a>
+                                    </div>
+                                    {{/if}}
+
+                                    
+
+                                    <!-- End Minicart -->
+                                </div>
+                            </div>
+                            <!-- End Right Side -->
+                        </div>
+                    </div>
+                </div>
+                <!-- End Header -->
+
+                <!-- Desktop Navigation -->
+                <div class="main-navigation d-none d-lg-block">
+                    <!-- Desktop Menu -->
+                    <nav class="grid__item" id="AccessibleNav">
+                        <div class="container">
+                            <ul id="siteNav" class="d-flex flex-wrap site-nav medium left hidearrow">
+                                <li class="lvl1 parent dropdown">
+                                    <a href="/">Home <i class="an an-angle-down"></i></a>
+                                </li>
+                              
+                                <li class="lvl1 parent megamenu">
+                                    <a href="#">Shop <i class="an an-angle-down"></i></a>
+                                    <div class="megamenu style1">
+                                        <div class="row">
+                                            <div class="lvl-1 col-6 col-md-3 col-lg-9">
+                                                <ul class="row grid--uniform mmWrapper">
+                                                    <li class="lvl-1 col-6 col-md-4 col-lg-4">
+                                                        <a href="#" class="site-nav lvl-1">Style Wear</a>
+                                                          
+                                                        <ul class="subLinks">
+                                                            {{#each catagory}}
+                                                            <li class="lvl-2"><a href="/get-catagory-products/{{this.name}}"
+                                                                    class="site-nav">{{this.name}}</a></li>
+                                                                     {{/each}}
+                                                        </ul>
+                                                    </li>
+                                                    
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                               
+                            </ul>
+                        </div>
+                    </nav>
+                    <!-- End Desktop Menu -->
+                </div>
+                <!-- End Desktop Navigation -->
+            </div>
+            <!-- End Desktop Header -->
+        </div>
+        <!-- End Main Header -->
+
+        <!-- Mobile Menu -->
+        <div class="mobile-nav-wrapper" role="navigation">
+            <div class="closemobileMenu"><i class="icon an an-times-circle closemenu"></i> Close Menu</div>
+            <ul id="MobileNav" class="mobile-nav">
+                <li class="lvl1 parent megamenu">
+                    <a href="/">Home <i class="an an-plus"></i></a>
+                </li>
+                <li class="lvl1 parent megamenu">
+                    <a href="shop-left-sidebar.html">Shop <i class="an an-plus"></i></a>
+                    <ul>
+                   
+                        <li>
+                            <a href="#" class="site-nav">Products <i class="an an-plus"></i></a>
+                                 
+                            <ul>
+                                {{#each catagory}}
+                                <li><a href="/get-catagory-products/{{this.name}}" class="site-nav">{{this.name}} </a></li>
+                                {{/each}}
+                            </ul>
+                            
+                        </li>
+                       
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <!-- End Mobile Menu -->

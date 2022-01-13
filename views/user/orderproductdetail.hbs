@@ -1,0 +1,46 @@
+                     <!-- Dashboard -->
+                     <section style="min-height: 70vh;">
+                        <div class="container-fluid">
+                    <div class="row">
+
+                                       <div class="page section-header text-center">
+                    <div class="page-title">
+                        <div class="wrapper"><h1 class="page-title">order product detail</h1></div>
+                    </div>
+                </div>
+                        
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 main-col">
+                            <form action="#">
+                                <div class="wishlist-table table-content table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                                <tr>
+                                                   
+                                                    <th>Product</th>
+                                                    <th>Image</th>
+                                                    <th>Brand</th>
+                                                    <th>Amount</th>
+                                                    <th>status</th>
+                                                    <th>Action </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                   {{#each products}}
+                                                <tr>
+                                                    <td>{{this.orderProduct.name}}</th>
+                                                    <th><img src="/product-images/{{this.orderProduct._id}}11.jpg" alt="" style="height: auto; width: 100px;"></th>
+                                                    <td>{{this.orderProduct.brand}}</td>
+                                                    <td>{{this.orderProduct.price}}</td>
+                                                    <td>{{this.status}} </td>
+                                                     <td class="product-subtotal text-center"><a href="/cancel-order/{{this._id}}" class="btn btn-small">Cancel</a></td>
+                                                </tr>
+                                                 {{/each}}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                    </div>
+                        </div>
+                        </section>
+                     

@@ -1,0 +1,146 @@
+<section class="container-scroller">
+  <div class="container-fluid page-body-wrapper">
+
+
+    {{>admin-sidebar}}
+    <div class="container pt-5">
+      <div class="d-flex mt-5 justify-content-center">
+        <div class="col-lg-8 mt-5 rounded-3 shadow-lg grid-margin stretch-card" style="border-radius: 30px !important;">
+          <div class="card border-0">
+            <div class="card-body">
+              <form action="/admin/admin-addbrand" method="post" enctype="multipart/form-data"
+                onsubmit="return addbrandvalidate()">
+
+                <div class="col-md-12 grid-margin stretch-card ">
+                  <div class="card">
+                    <div class="card-body">
+                      <h2 class="card-title">BRAND MANGEMENNT</h2>
+                      {{!-- <div class="form-group">
+                        <label for="inputimage">Brand Image</label>
+                        <input type="file" name="logoimage" class="form-control" id="imgview1"
+                          accept="image/jpeg,image/jpg,image/png">
+                        <p id="imagess" class="text text-danger"></p>
+                      </div> --}}
+
+
+                      <div class="row">
+                        <div id="image-box1" style="width: 300px; height: 300px; display: none;">
+                        </div>
+                        <div>
+                          <button class="btn btn-primary mt-3" type="button" style="display: none;"
+                            id="crop-btn1">Done</button>
+                        </div>
+                        <div class="mt-5 col-md-6">
+                          <label for="">Brand Logo</label>
+                          <img src="" alt="" style="width: 100px; height:auto" id="imgview1">
+                          <input type="file" name="logoimage" id="file1" class="form-control"
+                            onchange="return fileValidation1()">
+                          <p id="imagess" class="text text-danger"></p>
+
+                        </div>
+
+
+
+                        <div>
+                          <div class="form-group">
+                            <label>Enter The Brand</label>
+                            <input type="text" class="form-control form-control-lg" placeholder="Username"
+                              aria-label="Brand name" name="name" id="brands">
+                            <p id="branded" class="text text-danger"></p>
+                          </div>
+                          <div class="text-center">
+                            <button id="confirm-btn1" type="submit" class="btn btn-success ">Update</button>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+</section>
+
+
+<script>
+
+  function addbrandvalidate() {
+    var miages = document.getElementById("imgview1").value
+    var brand = document.getElementById("brands").value
+
+
+    if (brand == "") {
+      document.getElementById("branded").innerHTML =
+        "Enter the brand name"
+      return false
+    }
+    if (miages == "") {
+      document.getElementById("imagess").innerHTML =
+        "**Uplod brand logo"
+      return false
+    }
+  }
+</script>
+
+
+<script>
+
+  function fileValidation1() {
+
+    const imagebox = document.getElementById('image-box1')
+    const crop_btn = document.getElementById('crop-btn1')
+    var fileInput = document.getElementById('file1');
+
+    var filePath = fileInput.value;
+    var allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
+    if (!allowedExtensions.exec(filePath)) {
+      fileInput.value = '';
+      Swal.fire('Upload image only')
+      return false;
+    } else {
+      //Image preview
+      const img_data = fileInput.files[0]
+      const url = URL.createObjectURL(img_data)
+      imagebox.innerHTML = `<img src="${url}" id="image" style="width:100%">`
+      const image = document.getElementById('image')
+      document.getElementById('image-box1').style.display = 'block'
+      document.getElementById('crop-btn1').style.display = 'block'
+      document.getElementById('confirm-btn1').style.display = 'none'
+
+      const cropper = new Cropper(image, {
+        autoCropArea: 1,
+        viewMode: 1,
+        scalable: false,
+        zoomable: false,
+        movable: false,
+        aspectRatio: 16 / 19,
+        //  preview: '.preview',
+        minCropBoxWidth: 180,
+        minCropBoxHeight: 240,
+      })
+      crop_btn.addEventListener('click', () => {
+        cropper.getCroppedCanvas().toBlob((blob) => {
+          let fileInputElement = document.getElementById('file1');
+          let file = new File([blob], img_data.name, { type: "image/*", lastModified: new Date().getTime() });
+          let container = new DataTransfer();
+
+          container.items.add(file);
+          const img = container.files[0]
+          var url = URL.createObjectURL(img)
+          fileInputElement.files = container.files;
+          document.getElementById('imgview1').src = url
+          document.getElementById('image-box1').style.display = 'none'
+          document.getElementById('crop-btn1').style.display = 'none'
+          document.getElementById('confirm-btn1').style.display = 'block'
+        }, 'image/webp', 0.5);
+      });
+    }
+  }
+</script>

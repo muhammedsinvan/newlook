@@ -1,0 +1,153 @@
+<section class="container-scroller">
+  <div class="container-fluid page-body-wrapper">
+    <!-- partial:partials/_sidebar.html -->
+
+
+    {{>admin-sidebar}}
+
+
+    <div class="col-md-6 grid-margin stretch-card border ">
+      <div class="card ">
+        <div class="card-body ">
+          <h4 class="card-title ">Banner Mangement</h4>
+          <p class="card-description"> Enter the detail</p>
+          <form action="/admin/edit-banner/{{product._id}}" method="post" enctype="multipart/form-data" onsubmit="return editbannervalidate()">
+            <div class="form-group">
+              <label for="exampleInputUsername1">Title</label>
+              <input value="{{product.title}}" type="text" class="form-control" id="edittitle"
+                placeholder="title" name="title">
+                <p id="etitle" class="text text-danger"></p>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Sub Title</label>
+              <input value="{{product.subtitle}}" type="text" class="form-control" id="editsub"
+                placeholder="sub title" name="subtitle">
+                 <p id="estitle" class="text text-danger"></p>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Offer Value</label>
+              <input value="{{product.offervalue}}" type="text" class="form-control" id="editoffer"
+                placeholder="offer value" name="offervalue">
+                 <p id="evalues" class="text text-danger"></p>
+            </div>
+            {{!-- <div class="form-group">
+              <label for="inputimage">Banner Image</label>
+              <img src="/product-images/{{product._id}}1.jpg" alt="" style="width: 100px; height: auto;" id="imgview1">
+              <input type="file" name="bannerImage" class="form-control" id="imgview1"
+                accept="image/jpeg,image/jpg,image/png">
+                 <p id="eimg1" class="text text-danger"></p>
+            </div> --}}
+
+
+
+                <div id="image-box1" style="width: 300px; height: 300px; display: none;">
+                  </div>
+                  <div>
+                    <button class="btn btn-primary mt-3" type="button" style="display: none;"
+                      id="crop-btn1">Done</button>
+                  </div>
+                  <div class="mt-5 col-md-6">
+                    <label for="">IMAGE 1</label>
+                    <img src="/product-images/{{product._id}}1.jpg" alt="" style="width: 100px; height:auto" id="imgview1">
+                    <input type="file" name="bannerImage" id="file1" class="form-control"
+                      onchange="return fileValidation1()">
+                       <p id="eimg1" class="text text-danger"></p>
+     
+                  </div>
+            <div>
+
+              <button id="confirm-btn1" type="submit" class="btn btn-gradient-primary">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<script>
+  function editbannervalidate() {
+    var title = document.getElementById("edittitle").value
+    var subtitle = document.getElementById("editsub").value
+    var value = document.getElementById("editoffer").value
+    var imagebanner = document.getElementById("imgview1").value
+
+    if (title == "") {
+      document.getElementById("etitle").innerHTML =
+        "Enter the title"
+      return false
+    }
+    if (subtitle == "") {
+      document.getElementById("estitle").innerHTML =
+        "Enter the subtitle"
+      return false
+    }
+    if (value == "") {
+      document.getElementById("evalues").innerHTML =
+        "Enter the value"
+      return false
+    }
+    if (imagebanner == "") {
+      document.getElementById("eimg1").innerHTML =
+        "Uplod the image"
+      return false
+    }
+
+  }
+</script>
+
+<script>
+
+  function fileValidation1() {
+  
+    const imagebox = document.getElementById('image-box1')
+    const crop_btn = document.getElementById('crop-btn1')
+    var fileInput = document.getElementById('file1');
+
+    var filePath = fileInput.value;
+    var allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
+    if (!allowedExtensions.exec(filePath)) {
+      fileInput.value = '';
+      Swal.fire('Upload image only') 
+      return false;
+    } else {
+      //Image preview
+      const img_data = fileInput.files[0]
+      const url = URL.createObjectURL(img_data)
+      imagebox.innerHTML = `<img src="${url}" id="image" style="width:100%">`
+      const image = document.getElementById('image')
+      document.getElementById('image-box1').style.display = 'block'
+      document.getElementById('crop-btn1').style.display = 'block'
+      document.getElementById('confirm-btn1').style.display = 'none'
+
+      const cropper = new Cropper(image, {
+        autoCropArea: 1,
+        viewMode: 1,
+        scalable: false,
+        zoomable: false,
+        movable: false,
+        aspectRatio: 16 / 19,
+        //  preview: '.preview',
+        minCropBoxWidth: 180,
+        minCropBoxHeight: 240,
+      })
+      crop_btn.addEventListener('click', () => {
+        cropper.getCroppedCanvas().toBlob((blob) => {
+          let fileInputElement = document.getElementById('file1');
+          let file = new File([blob], img_data.name, { type: "image/*", lastModified: new Date().getTime() });
+          let container = new DataTransfer();
+
+          container.items.add(file);
+          const img = container.files[0]
+          var url = URL.createObjectURL(img)
+          fileInputElement.files = container.files;
+          document.getElementById('imgview1').src = url
+          document.getElementById('image-box1').style.display = 'none'
+          document.getElementById('crop-btn1').style.display = 'none'
+          document.getElementById('confirm-btn1').style.display = 'block'
+        }, 'image/webp', 0.5);
+      });
+    }
+  }
+</script>

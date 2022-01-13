@@ -1,0 +1,94 @@
+<section style="min-height: 70vh;">
+            <!-- Body Content -->
+            <div id="page-content">
+                <!--Page Title-->
+                <div class="page section-header text-center">
+                    <div class="page-title">
+                        <div class="wrapper"><h1 class="page-width">WishList</h1></div>
+                    </div>
+                </div>
+                <!--End Page Title-->
+
+                <div class="container">
+                    <!-- Toolbar -->
+                    <div class="toolbar border-bottom pb-4">
+                        <div class="wishlist-toolbar-wrapper">
+                        </div>
+                    </div>
+                    <!-- End Toolbar -->
+
+                    <!-- Grid Product -->
+                    <div class="grid-products grid--view-items wishlist-grid mt-4 mb-5 mb-3">
+
+                        
+
+                        <div class="row">
+                            {{#each allwishlist}}
+                            <div class="col-6 col-sm-4 col-md-3 col-lg-3 item">
+                                <!-- Product Image -->
+                                
+                                <div class="product-image">
+                                    <a href="/removeitemwishlist?proid={{this.product._id}}&&cartid={{this._id}}"><button type="button" class="btn close-btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove"><i class="icon an an-times"></i></button></a>
+                                    <!-- Product Image -->
+                                    <a href="/productdetail/{{this.product._id}}">
+                                        <!-- Image -->
+                                        <img  data-src="/product-images/{{this.product._id}}11.jpg" src="/product-images/{{this.product._id}}11.jpg" alt="image" title="product" />
+                                        <!-- End Image -->
+                                    </a>
+                                    <!-- End Product Image -->
+                                </div>
+                                <!-- End Product Image -->
+
+                                <!-- Product Details -->
+                                <div class="product-details text-center">
+                                    <!-- Product Name -->
+                                    <div class="product-name">
+                                        <a href="product-layout1.html">{{this.product.name}}</a>
+                                    </div>
+                                    <!-- End Product Name -->
+                                    <!-- Product Price -->
+                                    <div class="product-price">
+                                        <span class="old-price">$700.00</span>
+                                        <span class="price">{{this.product.price}}</span>
+                                    </div>
+                                    <!-- End Product Price -->
+                                    <!-- Product Button -->
+                                    <form  class="cart-form mt-3 d-flex justify-content-center" enctype="multipart/form-data">
+                                        <div class="customCheckbox pt-1">
+                                        </div>
+                                        <button onclick="addtocart('{{this.product._id}}')" ><a class="btn btn--small product-form__cart-submit"><span>Add to cart</span></a></button>
+                                    </form>
+                                  
+                                    <!-- End Product Button -->
+                                </div>
+                                 
+                                <!-- End Product Details -->
+                            </div>
+                            {{/each}}
+                            </div>
+                      
+                        </div>
+                            
+                    </div>
+                  
+                    <!-- End Grid Product-->
+                </div>
+            </div>
+            </section>
+            <!-- End Body Content -->
+<script>
+   function addtocart(proid){
+        $.ajax({
+            url:'/add-to-cart/'+proid,
+            method:'get',
+            success:(response)=>{
+                if(response.status){
+                    let count=$('#cart-count').html()
+                    count=parseInt(count)+1
+                    $("#cart-count").html(count)
+                }
+             
+            }  
+        })
+    }
+</script>

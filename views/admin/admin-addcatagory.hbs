@@ -1,0 +1,84 @@
+<section class="container-scroller">
+  <div class="container-fluid page-body-wrapper">
+
+
+{{>admin-sidebar}}
+   <div class="col-12 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+   <hr>
+    <form action="/admin/admin-addcatagory" method="post" onsubmit="return addcatagoryvalidate()">
+    
+     <div class="col-md-6 grid-margin stretch-card ">
+                <div class="card">
+                  <div class="card-body">
+                    <h2 class="card-title">CATAGORY MANGEMENNT</h2>
+                        <div class="form-group">
+                      <label>Enter The Catagory</label>
+                      <input id="catagorys" type="text" class="form-control form-control-lg" placeholder="catagory" aria-label="Username" name="name">
+                      <p id="cataogries" class="text text-danger"></p>
+                    </div>
+<hr>
+                      {{!-- <div class="form-group">
+                      <label>Enter The Sub Catagory</label>
+                      <input id="subcatagorys" type="text" class="form-control form-control-lg" placeholder="subcatagory" aria-label="Username" name="subname">
+                      <p id="subcataogries" class="text text-danger"></p>
+                    </div> --}}
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-success ">Add</button>
+                    </div>
+                  
+                  </div>
+                </div>
+              </div>
+</form>
+
+ <div class="col-lg-6 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h1 class="card-title">All Catagaries</h1>
+                    <table class="table table-hover">
+                      <thead>
+                        <tr>
+                          <th>Category</th>
+                          {{!-- <th>Sub Category</th> --}}
+                          <th>Delete</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {{#each catagory}}
+                        <tr>
+                          <td>{{this.name}}</td>
+                          {{!-- <td>{{this.subname}}</td> --}}
+                          <td><a  href="/admin/delete-catagory/{{this._id}}"><button class="btn btn-danger">Delete</button></a></td>
+                        </tr>
+                        {{/each}}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+
+
+</div>
+      </div>
+   </div>
+   </div>
+   
+   </section>
+
+    <script>
+
+      function addcatagoryvalidate(){
+     
+        var catagory = document.getElementById("catagorys").value
+
+
+        if(catagory == ""){
+          document.getElementById("cataogries").innerHTML=
+          "Enter the catagory name"
+          return false
+        }
+      }
+    </script>

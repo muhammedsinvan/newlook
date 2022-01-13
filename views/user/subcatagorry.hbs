@@ -1,0 +1,109 @@
+<section style="min-height: 70vh;">
+            <!-- Body Content -->
+            <div id="page-content">
+                <!-- Collection Banner -->
+               
+
+                <div class="container">
+                    <div class="row">
+                        <!-- Sidebar -->
+                       
+                        <!-- End Sidebar -->
+{{>user-detail}}
+                        <!-- Main Content -->
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-9 main-col">
+                            <div class="productList">
+                                <!-- Toolbar -->
+                                <div class="toolbar">
+                                    <div class="filters-toolbar-wrapper">
+                                        <div class="row">
+                                            <div class="col-4 col-md-4 col-lg-4 filters-toolbar__item collection-view-as d-flex justify-content-Start align-items-center">
+                                                <button type="button" class="btn-filter d-block d-md-block d-lg-none icon an an-sliders-h" data-bs-toggle="tooltip" data-bs-placement="top" title="Filters"></button>
+                                               
+                                               
+                                            </div>
+                                            <div class="col-4 col-md-4 col-lg-4 d-flex justify-content-end align-items-center text-end">
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End Toolbar -->
+
+                                <!-- Grid Product -->
+                                <div class="grid-products grid--view-items product-three-load-more">
+                                    <div class="row">
+                                        {{#each subcatagory}}
+                                        <div class="col-6 col-sm-6 col-md-4 col-lg-4 item">
+                                            <!-- Product Image -->
+                                            <div class="product-image">
+                                                <!-- Product Image -->
+                                                <a href="/productdetail/{{this._id}}">
+                                                    <!-- Image -->
+                                                    <img data-src="/product-images/{{this._id}}11.jpg" src="/product-images/{{this._id}}11.jpg" alt="image" title="product" />
+                                                    <!-- End Image -->
+                                                   
+                                                </a>
+                                                
+                                                <div class="button-set">
+                                                    <div>
+                                <button onclick="addtocart('{{this._id}}')" class="btn btn-dark"><i
+                                                class="icon an an-shopping-bag"></i></button>
+
+                                                <button onclick="addtowishlist(event,'{{this._id}}')" class="btn btn-dark"><i
+                                            class="icon an an-heart"></i></button>
+                            </div>
+                                                
+                                                </div>
+                                                <!-- End Product Button -->
+                                            </div>
+                                            <!-- End Product Image -->
+
+                                            <!-- Product Details -->
+                                            <div class="product-details text-center">
+                                                <!-- Product Name -->
+                                                <div class="product-name">
+                                                    <a href="product-layout1.html">{{this.name}}</a>
+                                                </div>
+                                                <!-- End Product Name -->
+                                                <!-- Product Price -->
+                                                <div class="product-price">
+                                                    {{#if this.offer}}
+                                                                           {{#if this.oldPrize}}
+                                            <span class="old-price">Rs:{{this.oldPrize}}</span>
+                                            {{/if}}
+                                            {{/if}}
+                                            <span class="price">Rs:{{this.price}}</span>
+                                            {{#if this.offer}}
+                                            {{#if this.value}}
+                                            <div class="text text-success"> {{this.value}}% Offer</div>
+                                            {{/if}}
+                                            {{/if}}
+                                                </div>
+                                                <!-- End Product Price -->
+                                                
+                                            </div>
+                                            <!-- End Product Details -->
+                                            
+                                        </div>
+                                        {{/each}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End Grid Product -->
+                            </div>
+
+                            <!-- Infinit Pagination -->
+                            <div class="infinitpaginOuter">
+                                <div class="infinitpagin-three">	
+                                    <a href="" class="btn loadMoreThree">Load More</a>
+                                </div>
+                            </div>
+                            <!-- End Infinit Pagination -->
+                        </div>
+                        <!-- End Main Content -->
+                    </div>
+                </div>
+            </div>
+            <!-- End Body Content -->
+</section>

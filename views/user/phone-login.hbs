@@ -1,0 +1,99 @@
+<!-- Body Content -->
+<div id="page-content">
+    <!-- Page Title -->
+    <div class="page section-header text-center mb-0">
+        <div class="page-title">
+            <div class="wrapper">
+                <h1 class="page-width">Login</h1>
+            </div>
+        </div>
+    </div>
+    <!-- End Page Title -->
+    <!-- Breadcrumbs -->
+    <div class="bredcrumbWrap bredcrumbWrapPage bredcrumb-style2 text-center">
+        <div class="container breadcrumbs">
+            <a href="index.html" title="Back to the home page">Home</a><span aria-hidden="true">|</span><span
+                class="title-bold">Login with OTP</span>
+        </div>
+    </div>
+    <!-- End Breadcrumbs -->
+    <form action="/loginphonenumber" method="post" onsubmit="return loginvalidationotp()">
+        <div class="container">
+            <div class="row">
+                <!-- Main Content -->
+                <div class="col-12 col-sm-12 col-md-6 col-lg-6 box mb-4 mb-md-0">
+
+                    <h3>New Customers</h3>
+                    <p>By creating an account with our store, you will be able to move through the checkout process
+                        faster, store multiple shipping addresses, view and track your orders in your account and more.
+                    </p>
+                    <a href="/user/signup" class="btn">Create an account</a>
+                </div>
+                <div class="col-12 col-sm-12 col-md-6 col-lg-6 box">
+                    <div class="mb-4">
+
+                        <h3>Login With Otp</h3>
+                        <p>If you have an account with us, please log in.</p>
+
+
+                        <div class="row">
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                            <div class="form-group">
+                                <label for="PhoneNumber">Number<span class="required">*</span></label>
+                                <input type="number" name="number" placeholder="" id="number" class="">
+                                <span id="PhoneNumberee" class="text-danger font-weight-regular"></span>
+                            </div>
+                            {{#if loginErrotp}}
+                            <p class="error" style="color:#ff0000;"> This Phone number is not valid</p>
+                            {{/if}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="text-left col-12 col-sm-12 col-md-12 col-lg-12">
+
+                            <button class="btn btn-dark">Send OTP</button>
+
+
+
+                        </div>
+                    </div>
+    </form>
+</div>
+</div>
+<!-- End Main Content -->
+</div>
+</div>
+</form>
+</div>
+<!-- End Body Content -->
+<!-- Scoll Top -->
+<div id="site-scroll"><i class="icon an an-angle-up"></i></div>
+<!-- End Scoll Top -->
+
+<script>
+
+    function loginvalidationotp() {
+console.log('functoin otttp')
+
+        let  phonenumber = document.getElementById("number").value;
+
+        if (phonenumber == "") {
+            document.getElementById("PhoneNumberee").innerHTML =
+                " **  fill the phonenumber field";
+            return false;
+        }
+        if (isNaN(phonenumber)) {
+            document.getElementById("PhoneNumberee").innerHTML =
+                " ** user must write digits only not characters";
+            return false;
+        }
+        if (phonenumber.length != 10) {
+            document.getElementById("PhoneNumberee").innerHTML =
+                " ** Mobile Number must be 10 digits only";
+            return false;
+        }
+
+    }
+
+</script>

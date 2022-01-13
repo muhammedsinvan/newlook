@@ -1,0 +1,202 @@
+<!-- Dashboard -->
+<style>
+    .custom-select {
+  position: relative;
+  font-family: Arial;
+}
+
+.custom-select select {
+  display: none; /*hide original SELECT element: */
+}
+
+.select-selected {
+  background-color: DodgerBlue;
+}
+
+/* Style the arrow inside the select element: */
+.select-selected:after {
+  position: absolute;
+  content: "";
+  top: 14px;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-color: #fff transparent transparent transparent;
+}
+
+/* Point the arrow upwards when the select box is open (active): */
+.select-selected.select-arrow-active:after {
+  border-color: transparent transparent #fff transparent;
+  top: 7px;
+}
+
+/* style the items (options), including the selected item: */
+.select-items div,.select-selected {
+  color: #ffffff;
+  padding: 8px 16px;
+  border: 1px solid transparent;
+  border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+  cursor: pointer;
+}
+
+/* Style items (options): */
+.select-items {
+  position: absolute;
+  background-color: DodgerBlue;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 99;
+}
+
+/* Hide the items when the select box is closed: */
+.select-hide {
+  display: none;
+}
+
+.select-items div:hover, .same-as-selected {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+</style>
+
+
+
+<section class="container-scroller">
+
+    <div class="container-fluid page-body-wrapper">
+
+
+        {{>admin-sidebar}}
+   <div class="container pt-5">
+            <div class="d-flex mt-5 justify-content-center">
+
+        <!-- Dashboard -->
+        <div class="container-fluid">
+            <div class="row">
+         
+                                         <div class="col-lg-12 mt-5 rounded-3 shadow-lg grid-margin stretch-card" style="border-radius: 30px !important;">
+                                             
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 main-col">
+                    <form action="">
+                        <div class="wishlist-table table-content table-responsive">
+                                    <h3 class="card-description text-center" > All Orders   </h3>
+                            <table class="table table-bordered" id="myTable">
+
+                                <br>
+                                <br>
+                                <br>
+
+                                <br>
+                                <br>
+                                <thead>
+                                    <tr>
+
+                                        <th>Date</th>
+                                        <th>Order Id</th>
+                                        <th>Total Amount</th>
+                                        <th>Payment method</th>
+                                        <th>status</th>
+                                        <th>Action</th>
+                                        <th>Detail</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {{#each history}}
+                                    <tr>
+                                        <td>{{this.date}}</td>
+                                        <td>{{this._id}}</td>
+                                        <td>₹{{this.totalamount}}</td>
+                                        <td>{{this.paymentmethod}}</td>
+                                        <td>{{this.status}} </td>
+                                        <td>
+                                       <div class="dropdown">
+                                        <button class="btn btn-dark dropdown-toggle p-1" type="button" id="{{this._id}}"
+                                            data-toggle="dropdown" aria-haspopup="true" 
+                                            style="height: 2em;width:7em" value="{{this.status}}"
+                                            onclick="statusChecker('{{this._id}}')">
+                                            {{this.status}}
+                                        </button>
+                                        <div class="dropdown-menu " aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" href="/admin/placed/{{this._id}}"
+                                                onclick="changeStatus(event)" style="text-decoration: none;"
+                                                id="{{this._id}}placed">Placed</a>
+                                            <a class="dropdown-item" href="/admin/shipped/{{this._id}}"
+                                                onclick="changeStatus(event)" style="text-decoration: none;"
+                                                id="{{this._id}}ship">Shipped</a>
+                                            <a class="dropdown-item" href="/admin/delivered/{{this._id}}"
+                                                onclick="changeStatus(event)" style="text-decoration: none;"
+                                                id="{{this._id}}deliver">Delivered</a>
+                                            <a class="dropdown-item" href="/admin/cancelled/{{this._id}}"
+                                                onclick="changeStatus(event)" style="text-decoration: none;"
+                                                id="{{this._id}}cancel">Cancelled</a>
+                                        </div>
+                                    </div>
+                                       
+                                       
+                                            
+                                        </td>
+
+                                        <td>
+                                            <a href="/admin/admin-productdetail/{{this._id}}"
+                                                class="btn btn-primary">View Detail</a>
+                                        </td>
+
+                                    </tr>
+                                    {{/each}}
+                                </tbody>
+                            </table>
+                        </div>
+                </div>
+
+            </div>
+             </div>
+        </div>
+
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<script>
+  $(document).ready(function () {
+        $('#myTable').DataTable();
+    });
+</script>
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+    crossorigin="anonymous"></script>
+<script>
+    function statusChecker(orderId) {
+     
+        let status = document.getElementById(orderId).value
+
+       
+        if (status === 'Placed') {
+            document.getElementById(orderId + 'placed').style.display = "none";
+
+        } else if (status === 'Shipped') {
+            document.getElementById(orderId + 'placed').style.display = "none";
+            document.getElementById(orderId + 'ship').style.display = "none";
+            
+
+        } else if (status === 'Delivered') {
+            document.getElementById(orderId + 'placed').style.display = "none";
+            document.getElementById(orderId + 'ship').style.display = "none";
+            document.getElementById(orderId + 'cancel').style.display = "none";
+            document.getElementById(orderId + 'deliver').style.display = "none";
+
+        } else if (status === 'Cancelled') {
+            document.getElementById(orderId + 'placed').style.display = "none";
+            document.getElementById(orderId + 'ship').style.display = "none";
+            document.getElementById(orderId + 'deliver').style.display = "none";
+            document.getElementById(orderId + 'cancel').style.display = "none";
+        }
+    }
+</script>
+

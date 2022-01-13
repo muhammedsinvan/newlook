@@ -1,0 +1,68 @@
+                     <!-- Dashboard -->
+                     <section style="min-height: 70vh;">
+                        <div class="container-fluid">
+                    <div class="row">
+                                    <div class="page section-header text-center">
+                    <div class="page-title">
+                        <div class="wrapper"><h1 class="page-title">orders</h1></div>
+                    </div>
+                </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 main-col">
+                            <form action="#">
+                                <div class="wishlist-table table-content table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                                <tr>
+                                                   
+                                                    <th>Date</th>
+                                                    <th>Order Id</th>
+                                                    <th>Total Amount</th>
+                                                    <th>Payment method</th>
+                                                    <th>status</th>
+                                                    <th>Action</th>
+                                                    <th>Order Detail</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                   {{#each orderhistory}}
+                                                <tr>
+                                                    <td>{{this.date}}</th>
+                                                    <th>{{this._id}}</th>
+                                                    <td>{{this.totalamount}}</td>
+                                                    <td>{{this.paymentmethod}}</td>
+
+
+                                                    {{#if this.delivered}}
+                                                    <td>{{this.status}} </td>
+                                                    {{else}}
+                                                    {{#if this.cancelled}}
+                                                    <td>{{this.status}} </td>
+                                                    {{else}}
+                                                    <td>{{this.status}} </td>
+                                                    {{/if}}
+                                                    {{/if}}
+                                                    {{#if this.deliverd}}
+                                                    {{else}}
+                                                    {{#if this.cancelled}}
+                                                    {{else}}
+
+                                                    {{/if}}
+                                                    {{/if}}
+
+
+                                                     <td class="product-subtotal text-center"><a href="/cancel-order/{{this._id}}" class="btn btn-small">Cancel</a></td>                                           
+                                                     <td>
+                                                         <a href="/view-order-products/{{this._id}}" class="btn btn-primary">View Detail</a>
+                                                     </td>
+                                                    
+                                                   
+                                                </tr>
+                                                 {{/each}}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                    </div>
+                        </div>
+                     </section>

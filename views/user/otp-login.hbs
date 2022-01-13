@@ -1,0 +1,66 @@
+<form action="/otplogin" method="post">
+    <div id="app">
+        <div class="container height-100 d-flex justify-content-center align-items-center">
+            <div class="position-relative">
+                <div class="card p-2 text-center">
+                    <h6>Please enter the one time password <br> </h6>
+                    <div id="otp" class="inputs d-flex flex-row justify-content-center mt-2">
+
+                
+                 <input class="m-2 text-center form-control rounded" type="text" id="input1"
+                            v-on:keyup="inputenter(1)" maxlength="1" name="otp" /> 
+                             
+                            <input class="m-2 text-center form-control rounded" v-on:keyup="inputenter(2)" type="text"
+                            id="input2" maxlength="1" name="otp" /> 
+                            <input class="m-2 text-center form-control rounded"
+                            v-on:keyup="inputenter(3)" type="text" id="input3" maxlength="1" name="otp" />
+                             <input class="m-2 text-center form-control rounded" v-on:keyup="inputenter(4)" type="text"
+                            id="input4" maxlength="1" name="otp" /> </div>
+                            <div>Time left : <span id="timer"></span></div>
+                    <div class="mt-4"> <button class="btn btn-danger px-4 validate" id="mybtn">Validate</button> </div>
+                    <div class="mt-3 content d-flex justify-content-center align-items-center"> 
+                        <a href="#" class="text-decoration-none ms-3">Resend</a> </div>
+                         {{#if otperrorone}}
+                        <p class="error" style="color:#ff0000;">**Entered is wrong OTP</p>
+                        {{/if}}
+                      
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+<script>
+    let timerOn = true;
+   
+  
+    
+    function timer(remaining) {
+        var m = Math.floor(remaining / 60);
+        var s = remaining % 60;
+
+        m = m < 10 ? '0' + m : m;
+        s = s < 10 ? '0' + s : s;
+        document.getElementById('timer').innerHTML = m + ':' + s;
+        remaining -= 1;
+
+        if (remaining >= 0 && timerOn) {
+            setTimeout(function () {
+                timer(remaining);
+            }, 1000);
+            return;
+        }
+
+        if (!timerOn) {
+            // Do validate stuff here
+            return;
+        }
+        // Do timeout stuff here
+                document.getElementById('timer').innerHTML = "OTP experied"
+                document.getElementById("myBtn").disabled = true;
+    }
+
+    timer(120);
+
+</script>

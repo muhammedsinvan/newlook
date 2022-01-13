@@ -1,0 +1,61 @@
+<section class="container-scroller">
+  <div class="container-fluid page-body-wrapper">
+    <!-- partial:partials/_sidebar.html -->
+
+    {{>admin-sidebar}}
+
+        <div class="container pt-5">
+            <div class="d-flex mt-5 justify-content-center">
+   
+                              <div class="col-lg-12 mt-5 rounded-3 shadow-lg grid-margin stretch-card" style="border-radius: 30px !important;">
+      <div class="card border-0">
+        <div class="card-body">
+          <h4 class="card-title">User Manegement</h4>
+          <h1 class="card-description"> User Manegement</h1>
+          <table class="table table-striped" id="myTablese">
+            <thead>
+              <tr>
+                <th> First Name </th>
+                <th> Last Name</th>
+                <th> Email </th>
+                <th> Number </th>
+                <th> Action </th>
+              </tr>
+            </thead>
+            <tbody>
+              {{#each details}}
+              <tr>
+                <td>{{firstname}}</td>
+                <td>{{lastname}}</td>
+                <td>{{email}}</td>
+                <td>{{number}}</td>
+
+                <td>
+                 {{#if this.permission}}
+                  <a href="/admin/block-user/{{this._id}}" class="btn btn-success btn-sm ">Block</a>
+                  {{else}}
+                 
+                  <a href="/admin/block-user/{{this._id}}" class="btn btn-warning btn-sm ">Unblock</a>
+                   {{/if}}
+                </td>
+
+               
+              </tr>
+              {{/each}}
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+      </div>
+  </div>
+  </div>
+  </section>
+
+  <script>
+  $(document).ready(function () {
+        $('#myTablese').DataTable();
+    });
+</script>

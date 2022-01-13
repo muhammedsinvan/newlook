@@ -1,0 +1,173 @@
+
+<section style="min-height: 70vh;">
+
+<div class="container">
+	<div class="main-body pt-5">
+		{{#each prefileedit}}
+		<form method="post" action="/editprofile/{{this._id}}" enctype="multipart/form-data" onsubmit="return addprofilevalidate()">
+			<div class="row">
+				<div class="col-lg-4">
+					<div class="card">
+						<div class="card-body">
+							<div id="image-box1" style="width: 300px; height: 300px; display: none;">
+							</div>
+							<div>
+								<button class="btn btn-primary mt-3" type="button" style="display: none;"
+									id="crop-btn1">Done</button>
+							</div>
+
+							<div class="mt-5 col-md-6">
+								<label for="">Profile Image</label>
+								<img src="/product-images/{{this._id}}66.jpg" alt="" style="width: 100px; height:auto" id="imgview1">
+								<input type="file" name="image1" id="file1" class="form-control" 
+									onchange="return fileValidation1()">
+									<p id="imgpro" class="text text-danger"></p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-8">
+					<div class="card">
+						<div class="card-body">
+
+							<div class="row mb-3">
+								<div class="col-sm-3">
+
+									<h6 class="mb-0">First Name</h6>
+								</div>
+								<div class="col-sm-9 text-secondary">
+									<input type="text" class="form-control" name="firstname" value="{{this.firstname}}" id="profname">
+									<p id="etnem" class="text text-danger"></p>
+								</div>
+							</div>
+							<div class="row mb-3">
+								<div class="col-sm-3">
+									<h6 class="mb-0">Last Name</h6>
+								</div>
+								<div class="col-sm-9 text-secondary">
+									<input type="text" class="form-control" name="lastname" value="{{this.lastname}}" id="prolname">
+									<p id="netla" class="text text-danger"></p>
+								</div>
+							</div>
+							<div class="row mb-3">
+								<div class="col-sm-3">
+									<h6 class="mb-0">Email</h6>
+								</div>
+								<div class="col-sm-9 text-secondary">
+									<input type="text" class="form-control" name="email" value="{{this.email}}" id="proemail">
+									<p id="entemail" class="text text-danger"></p>
+								</div>
+							</div>
+
+								<div class="row mb-3">
+								<div class="col-sm-3">
+									<h6 class="mb-0" hidden>Number</h6>
+								</div>
+								<div class="col-sm-9 text-secondary">
+									<input type="text" class="form-control" name="number" value="{{this.number}}" id="pronumber" hidden>
+									<p id="pornumber" class="text text-danger"></p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-3"></div>
+								<div class="col-sm-9 text-secondary">
+
+									<input id="confirm-btn1" type="submit" class="btn btn-primary px-4" value="Save Changes">
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+		{{/each}}
+	</div>
+</div>
+
+</section>
+
+    <script> 
+
+  function fileValidation1() {
+  
+    const imagebox = document.getElementById('image-box1')
+    const crop_btn = document.getElementById('crop-btn1')
+    var fileInput = document.getElementById('file1');
+
+
+    var filePath = fileInput.value;
+    var allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
+    if (!allowedExtensions.exec(filePath)) {
+      fileInput.value = '';
+      Swal.fire('Upload image only') 
+      return false;
+    } else {
+      //Image preview
+      const img_data = fileInput.files[0]
+      const url = URL.createObjectURL(img_data)
+      imagebox.innerHTML = `<img src="${url}" id="image" style="width:100%">`
+      const image = document.getElementById('image')
+      document.getElementById('image-box1').style.display = 'block'
+      document.getElementById('crop-btn1').style.display = 'block'
+      document.getElementById('confirm-btn1').style.display = 'none'
+
+      const cropper = new Cropper(image, {
+        autoCropArea: 1,
+        viewMode: 1,
+        scalable: false,
+        zoomable: false,
+        movable: false,
+        aspectRatio: 16 / 19,
+        //  preview: '.preview',
+        minCropBoxWidth: 180,
+        minCropBoxHeight: 240,
+      })
+      crop_btn.addEventListener('click', () => {
+        cropper.getCroppedCanvas().toBlob((blob) => {
+          let fileInputElement = document.getElementById('file1');
+          let file = new File([blob], img_data.name, { type: "image/*", lastModified: new Date().getTime() });
+          let container = new DataTransfer();
+
+          container.items.add(file);
+          const img = container.files[0]
+          var url = URL.createObjectURL(img)
+          fileInputElement.files = container.files;
+          document.getElementById('imgview1').src = url
+          document.getElementById('image-box1').style.display = 'none'
+          document.getElementById('crop-btn1').style.display = 'none'
+          document.getElementById('confirm-btn1').style.display = 'block'
+        }, 'image/webp', 0.5);
+      });
+    }
+  }
+    </script>
+
+
+<script>
+	   function addprofilevalidate(){
+        var fname=document.getElementById("profname").value
+        var lname = document.getElementById("prolname").value
+		 var pemail = document.getElementById("proemail").value
+		 var image1=document.getElementById("file1").value
+
+
+
+        if(fname == ""){
+          document.getElementById("etnem").innerHTML=
+          "**Enter the first name"
+          return false
+        }
+        if(lname ==""){
+          document.getElementById("netla").innerHTML=
+          "**Enter the last name"
+          return false
+        }
+		if(pemail ==""){
+          document.getElementById("entemail").innerHTML=
+          "**Enter the email"
+          return false
+        }
+		
+      }
+</script>

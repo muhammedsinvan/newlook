@@ -1,0 +1,173 @@
+   
+    <section class="container-scroller">
+      <div class="container-fluid page-body-wrapper">
+
+
+{{>admin-sidebar}}
+      
+         
+              <div class="col-lg-6 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Banner Page</h4>
+                    <p class="card-description"> Add Banner</p>
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>Banner</th>
+                          <th>Name</th>
+                          <th>Offer type</th>
+                          <th class="pl-5">   Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {{#each banner}}
+                        <tr>
+                          <td><img src="/product-images/{{this._id}}1.jpg"></td>
+                          <td>{{this.title}}</td>
+                          <td>{{this.subtitle}}</td>
+                          <td><a href="/admin/edit-banner/{{this._id}}"><button class="btn btn-success">Edit</button></a>
+                          <a href="/admin/delete-banner/{{this._id}}"><button class="btn btn-danger">Delete</button></a>
+                          </td>
+                        </tr>
+                        {{/each}}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+
+                <div class="col-md-4 grid-margin stretch-card border ">
+                <div class="card ">
+                  <div class="card-body ">
+                    <h4 class="card-title ">Banner Mangement</h4>
+                    <p class="card-description"> Enter the detail</p>
+                    <form action="/admin/add-banner" method="post" enctype="multipart/form-data" onsubmit="return addbannervalidate()">
+                      <div class="form-group">
+                        <label for="exampleInputUsername1">Title</label>
+                        <input type="text" class="form-control" id="exampleInputUsername1" placeholder="title" name="title">
+                        <p id="btitle" class="text text-danger"></p>
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Sub Title</label>
+                        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="sub title" name="subtitle">
+                        <p id="bstitle" class="text text-danger"></p>
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputPassword1">Offer Value</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="offer value" name="offervalue">
+                        <p id="bvalues" class="text text-danger"></p>
+                      </div>
+
+                  <div id="image-box1" style="width: 300px; height: 300px; display: none;">
+                  </div>
+                  <div>
+                    <button class="btn btn-primary mt-3" type="button" style="display: none;"
+                      id="crop-btn1">Done</button>
+                  </div>
+                  <div class="mt-5 col-md-6">
+                    <label for="">Banner Image</label>
+                    <img src="" alt="" style="width: 100px; height:auto" id="imgview1">
+                    <input type="file" name="bannerimage" id="file1" class="form-control"
+                      onchange="return fileValidation1()">
+                      <p id="img1" class="text text-danger"></p>
+     
+                  </div>
+
+                      <div>  
+                      <button id="confirm-btn1" type="submit" class="btn btn-gradient-primary">Submit</button>
+                      </div>
+                        </form>
+                  </div>
+                </div>
+              </div>
+            
+              </div>
+    </section>
+
+    <script>
+            function addbannervalidate(){
+        var title=document.getElementById("exampleInputUsername1").value
+        var subtitle = document.getElementById("exampleInputEmail1").value
+           var value=document.getElementById("exampleInputPassword1").value
+        var imagebanner = document.getElementById("file1").value
+
+        if(title == ""){
+          document.getElementById("btitle").innerHTML=
+          "Enter the title"
+          return false
+        }
+        if(subtitle ==""){
+          document.getElementById("bstitle").innerHTML=
+          "Enter the subtitle"
+          return false
+        }
+         if(value ==""){
+          document.getElementById("bvalues").innerHTML=
+          "Enter the value"
+          return false
+        }
+           if(imagebanner ==""){
+          document.getElementById("img1").innerHTML=
+          "Uplod the image"
+          return false
+        }
+    
+      }
+    </script>
+
+
+    <script>
+        function fileValidation1() {
+  
+    const imagebox = document.getElementById('image-box1')
+    const crop_btn = document.getElementById('crop-btn1')
+    var fileInput = document.getElementById('file1');
+
+    var filePath = fileInput.value;
+    var allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
+    if (!allowedExtensions.exec(filePath)) {
+      fileInput.value = '';
+      Swal.fire('Upload image only') 
+      return false;
+    } else {
+      //Image preview
+      const img_data = fileInput.files[0]
+      const url = URL.createObjectURL(img_data)
+      imagebox.innerHTML = `<img src="${url}" id="image" style="width:100%">`
+      const image = document.getElementById('image')
+      document.getElementById('image-box1').style.display = 'block'
+      document.getElementById('crop-btn1').style.display = 'block'
+      document.getElementById('confirm-btn1').style.display = 'none'
+
+      const cropper = new Cropper(image, {
+        autoCropArea: 1,
+        viewMode: 1,
+        scalable: false,
+        zoomable: false,
+        movable: false,
+        aspectRatio: 16 / 19,
+        //  preview: '.preview',
+        minCropBoxWidth: 180,
+        minCropBoxHeight: 240,
+      })
+      crop_btn.addEventListener('click', () => {
+        cropper.getCroppedCanvas().toBlob((blob) => {
+          let fileInputElement = document.getElementById('file1');
+          let file = new File([blob], img_data.name, { type: "image/*", lastModified: new Date().getTime() });
+          let container = new DataTransfer();
+
+          container.items.add(file);
+          const img = container.files[0]
+          var url = URL.createObjectURL(img)
+          fileInputElement.files = container.files;
+          document.getElementById('imgview1').src = url
+          document.getElementById('image-box1').style.display = 'none'
+          document.getElementById('crop-btn1').style.display = 'none'
+          document.getElementById('confirm-btn1').style.display = 'block'
+        }, 'image/webp', 0.5);
+      });
+    }
+  }
+    </script>
