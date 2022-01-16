@@ -135,11 +135,11 @@ router.post('/login', (req, res) => {
         res.redirect('/')
       } else {
         req.session.blockErr = true
-        res.redirect('/login')
+        res.redirect('/user/login')
       }
     } else {
       req.session.loginErr = true
-      res.redirect('/login')
+      res.redirect('/user/login')
     }
   })
 })
@@ -281,8 +281,8 @@ router.post('/checkout', async (req, res) => {
           "payment_method": "paypal"
         },
         "redirect_urls": {
-          "return_url": "http://localhost:3001/success",
-          "cancel_url": "http://localhost:3001/cancel"
+          "return_url": "http://newlookcom.xyz/success",
+          "cancel_url": "http://newlookcom.xyz/cancel"
         },
         "transactions": [{
           "item_list": {
