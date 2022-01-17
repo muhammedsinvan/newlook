@@ -1,100 +1,86 @@
-   
-    <section class="container-scroller">
-      <div class="container-fluid page-body-wrapper">
+<section class="container-scroller">
+  <div class="container-fluid page-body-wrapper">
 
 
-{{>admin-sidebar}}
-              
-  <div class="container pt-5">
-            <div class="d-flex mt-5 justify-content-center">
-
-                  <div class="col-lg-8 mt-5 rounded-3 shadow-lg grid-margin stretch-card" style="border-radius: 30px !important;">
-                <div class="card border-0">
-                  <div class="card-body "  style="overflow-y: auto;">
-                    <h4 class="card-title ">Coupen Management</h4>
-                    <h2 class="card-description"> Enter the coupen detail</h2>
-                    <form action="/admin/add-coupen" method="post" onsubmit="return addcoupenvalidate()">
-
-                      <div class="form-group">
-                        <label for="exampleInputUsername1">Enter the coupen name</label>
-                        <input type="text" class="form-control" id="namescoupen" placeholder="Enter the name of coupen" name="name">
-                        <p id="namecoupen" class="text text-danger"></p>
-                      </div>
-                      <div class="form-group">
-                        <label for="exampleInputPassword1">Coupen Value</label>
-                        <input type="number" class="form-control" id="validcoupen" placeholder="value of coupen" name="value">
-                        <p id="values" class="text text-danger"></p>
-                      </div>
-
-                   <div class="col-md-4">
-                      <label for="">Expire Date</label>
-
-                      <input type="date" class="border form-control" name="enddate" id="enddate" >
-                       <p id="detes" class="text text-danger"></p>
-                    </div>
-        <br>
-                      <button type="submit" class="btn btn-gradient-primary">Submit</button>
-                      </div>
-                        </form>
-                  </div>
+    {{>admin-sidebar}}
+    <div class="container pt-5">
+      <div class="d-flex mt-5 justify-content-center">
+        <div class="col-lg-8 mt-5 rounded-3 shadow-lg grid-margin stretch-card" style="border-radius: 30px !important;">
+          <div class="card border-0">
+            <div class="card-body " style="overflow-y: auto;">
+              <h4 class="card-title ">Coupen Management</h4>
+              <h2 class="card-description"> Enter the coupen detail</h2>
+              <form action="/admin/add-coupen" method="post" onsubmit="return addcoupenvalidate()">
+                <div class="form-group">
+                  <label for="exampleInputUsername1">Enter the coupen name</label>
+                  <input type="text" class="form-control" id="namescoupen" placeholder="Enter the name of coupen"
+                    name="name">
+                  <p id="namecoupen" class="text text-danger"></p>
                 </div>
-              </div>
-               </div>
-              </div>
-            
-              </div>
-    </section>
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Coupen Value</label>
+                  <input type="number" class="form-control" id="validcoupen" placeholder="value of coupen" name="value">
+                  <p id="values" class="text text-danger"></p>
+                </div>
+                <div class="col-md-4">
+                  <label for="">Expire Date</label>
+                  <input type="date" class="border form-control" name="enddate" id="enddate">
+                  <p id="detes" class="text text-danger"></p>
+                </div>
+                <br>
+                <button type="submit" class="btn btn-gradient-primary">Submit</button>
+            </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  </div>
+</section>
 
 
-    <script>
-
-      function addcoupenvalidate(){
-        var coupen=document.getElementById("namescoupen").value
-        var valuecopen = document.getElementById("validcoupen").value
-        var date=document.getElementById("enddate").value
-
-
-        if(coupen == ""){
-          document.getElementById("namecoupen").innerHTML=
-          "Enter the coupen name"
-          return false
-        }
-        if(valuecopen == ""){
-          document.getElementById("values").innerHTML=
-          "Enter the coupen value"
-          return false
-        }
-        if(valuecopen.length >=3){
-      document.getElementById("values").innerHTML=
-          "Enter the valid coupen value"
-          return false
-      }
-      if(date == ""){
-        document.getElementById("detes").innerHTML=
+<script>
+  function addcoupenvalidate() {
+    var coupen = document.getElementById("namescoupen").value
+    var valuecopen = document.getElementById("validcoupen").value
+    var date = document.getElementById("enddate").value
+    if (coupen == "") {
+      document.getElementById("namecoupen").innerHTML =
+        "Enter the coupen name"
+      return false
+    }
+    if (valuecopen == "") {
+      document.getElementById("values").innerHTML =
+        "Enter the coupen value"
+      return false
+    }
+    if (valuecopen.length >= 3) {
+      document.getElementById("values").innerHTML =
+        "Enter the valid coupen value"
+      return false
+    }
+    if (date == "") {
+      document.getElementById("detes").innerHTML =
         "Please select the date"
-      }
-      }
-    </script>
+    }
+  }
+</script>
 
 
-    <script>
-        $(function () {
-            var dtToday = new Date();
+<script>
+  $(function () {
+    var dtToday = new Date();
+    var month = dtToday.getMonth() + 1;
+    var day = dtToday.getDate();
+    var year = dtToday.getFullYear();
+    if (month < 10)
+      month = '0' + month.toString();
+    if (day < 10)
+      day = '0' + day.toString();
 
-            var month = dtToday.getMonth() + 1;
-            var day = dtToday.getDate();
-            var year = dtToday.getFullYear();
-            if (month < 10)
-                month = '0' + month.toString();
-            if (day < 10)
-                day = '0' + day.toString();
-
-            var maxDate = year + '-' + month + '-' + day;
-
-            // or instead:
-            // var maxDate = dtToday.toISOString().substr(0, 10);
-
-
-            $('#enddate').attr('min', maxDate);
-        });
-    </script>
+    var maxDate = year + '-' + month + '-' + day;
+    $('#enddate').attr('min', maxDate);
+  });
+</script>

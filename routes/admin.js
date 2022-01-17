@@ -11,6 +11,7 @@ const moment = require('moment')
 
 
 
+//checking the admin
 const verifylogin = (req, res, next) => {
   if (req.session.loggedIn) {
     next()

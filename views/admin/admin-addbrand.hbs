@@ -10,19 +10,10 @@
             <div class="card-body">
               <form action="/admin/admin-addbrand" method="post" enctype="multipart/form-data"
                 onsubmit="return addbrandvalidate()">
-
                 <div class="col-md-12 grid-margin stretch-card ">
                   <div class="card">
                     <div class="card-body">
                       <h2 class="card-title">BRAND MANGEMENNT</h2>
-                      {{!-- <div class="form-group">
-                        <label for="inputimage">Brand Image</label>
-                        <input type="file" name="logoimage" class="form-control" id="imgview1"
-                          accept="image/jpeg,image/jpg,image/png">
-                        <p id="imagess" class="text text-danger"></p>
-                      </div> --}}
-
-
                       <div class="row">
                         <div id="image-box1" style="width: 300px; height: 300px; display: none;">
                         </div>
@@ -36,11 +27,7 @@
                           <input type="file" name="logoimage" id="file1" class="form-control"
                             onchange="return fileValidation1()">
                           <p id="imagess" class="text text-danger"></p>
-
                         </div>
-
-
-
                         <div>
                           <div class="form-group">
                             <label>Enter The Brand</label>
@@ -51,7 +38,6 @@
                           <div class="text-center">
                             <button id="confirm-btn1" type="submit" class="btn btn-success ">Update</button>
                           </div>
-
                         </div>
                       </div>
                     </div>
@@ -59,10 +45,7 @@
                 </div>
               </form>
             </div>
-
-
           </div>
-
         </div>
       </div>
     </div>
@@ -70,7 +53,6 @@
 
 
 <script>
-
   function addbrandvalidate() {
     var miages = document.getElementById("imgview1").value
     var brand = document.getElementById("brands").value
@@ -91,7 +73,6 @@
 
 
 <script>
-
   function fileValidation1() {
 
     const imagebox = document.getElementById('image-box1')

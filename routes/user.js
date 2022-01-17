@@ -7,12 +7,15 @@ const paypal = require('paypal-rest-sdk');
 var { ObjectId } = require('mongodb').ObjectID
 var adminhelper = require('../helpers/admin-helpers');
 var userhelper = require('../helpers/user-helpers');
+
+//otp twilio
 const serviceid = "VA263769e4770757a6e87452d131f90b42"
 const accoundsid = "ACcda0e78b1722b862a19e21c127c93e85"
 const authtoken = "ae8f69933c5a8d17f2b22cef41956e6a"
 const client = require('twilio')(accoundsid, authtoken)
 
 
+//papal config
 paypal.configure({
   'mode': 'sandbox', //sandbox or live
   'client_id': 'AffQOet64ucC_wf844tRGvDeammER3DW5FbmnqS_N1Y7XYhal_RmOHoe7n1us3icMJoMp74BXq9z-bFt',
@@ -22,6 +25,7 @@ paypal.configure({
 let signup_body = {}
 
 
+//checking login
 const verifylogin = (req, res, next) => {
   if (req.session.user) {
     next()
@@ -33,13 +37,11 @@ const verifylogin = (req, res, next) => {
 
 /* GET home page. */
 router.get('/', async function (req, res, next) {
-
   user = req.session.user
   let cartcount = null
   if (req.session.user) {
     cartcount = await userhelper.getcartcount(req.session.user._id)
   }
-
   userhelper.getcatagory().then((catagory) => {
     userhelper.getbrandhome().then((brand) => {
       userhelper.getbanner().then((banner) => {
@@ -54,32 +56,31 @@ router.get('/', async function (req, res, next) {
 
 //login page
 router.get('/user/login', function (req, res, next) {
-  if(req.session.user){
+  if (req.session.user) {
     res.redirect('/')
-  }else{
-  res.render('user/login', { layout: 'user/user', login: true, loginErr: req.session.loginErr })
-  req.session.loginErr = false
+  } else {
+    res.render('user/login', { layout: 'user/user', login: true, loginErr: req.session.loginErr })
+    req.session.loginErr = false
   }
 })
 
 //signup page
 router.get('/user/signup', function (req, res, next) {
-  if(req.session.user){
+  if (req.session.user) {
     res.redirect('/')
-  }else{
-  res.render('user/signup', { layout: 'user/user', login: true, userExists: req.session.userExists })
-  req.session.userExists = false
+  } else {
+    res.render('user/signup', { layout: 'user/user', login: true, userExists: req.session.userExists })
+    req.session.userExists = false
   }
 })
 
 //otp page
-
 router.get('/user/otp', (req, res) => {
-  if(req.session.user){
+  if (req.session.user) {
     res.redirect('/')
-  }else{
-  res.render('user/otp', { layout: 'user/user', login: true, errorsignup: req.session.errorsignup })
-  req.session.errorsignup = false
+  } else {
+    res.render('user/otp', { layout: 'user/user', login: true, errorsignup: req.session.errorsignup })
+    req.session.errorsignup = false
   }
 })
 
@@ -161,12 +162,8 @@ router.get('/cart', verifylogin, async (req, res) => {
   cartcount = await userhelper.getcartcount(req.session.user._id)
   let products = await userhelper.getcartproduct(req.session.user._id)
   userhelper.getcatagory().then(async (catagory) => {
-    // proid=products[0]._id
-    // let subtotal=await userhelper.getsubtotal(req.session.user._id,proid)
-
     let totalvalue = 0
     if (products.length > 0) {
-
       totalvalue = await userhelper.gettotalamount(req.session.user._id)
       newcarttotal = req.session.newcartamount
       usedcoupen = req.session.coupenused
@@ -192,7 +189,6 @@ router.get('/add-to-cart/:id', (req, res) => {
   if (req.session.user) {
     userhelper.addtocart(req.params.id, req.session.user._id).then(() => {
       res.json({ status: true, user: true })
-
     })
   } else {
     res.json({ user: false })
@@ -268,10 +264,6 @@ router.post('/checkout', async (req, res) => {
       req.session.newcartamount = null
       userhelper.usedcoupen(req.session.coupen, req.session.user._id).then(() => {
         res.json({ codsuccess: true })
-        // userhelper.updatestock(orderid).then(()=>{
-        //   console.log("orderid")
-        //   console.log(orderid)
-        // })
       })
     } else if (req.body['paymentmethod'] === "online") {
       userhelper.generaterazorpay(orderid, total).then((response) => {
@@ -334,7 +326,7 @@ router.post('/checkout', async (req, res) => {
   })
 })
 
-
+//rendreing the success page paypal
 router.get('/success', (req, res) => {
   let val = req.session.total
   val = val / 74
@@ -351,10 +343,8 @@ router.get('/success', (req, res) => {
       }
     }]
   };
-  console.log(req.session.total)
   paypal.payment.execute(paymentId, execute_payment_json, function (error, payment) {
     if (error) {
-      console.log(error.response);
       throw error;
     } else {
       userhelper.clearcart(req.session.user._id).then(() => {
@@ -390,11 +380,11 @@ router.get('/phonelogin', (req, res) => {
 
 //login otp pagereq.session.otperror=true
 router.get('/otplogin', (req, res) => {
-  if(req.session.user){
+  if (req.session.user) {
     res.redirect('/')
-  }else{
-  res.render('user/otp-login', { layout: 'user/user', login: true, otperrorone: req.session.otperrorone })
-  req.session.otperrorone = false
+  } else {
+    res.render('user/otp-login', { layout: 'user/user', login: true, otperrorone: req.session.otperrorone })
+    req.session.otperrorone = false
   }
 })
 
@@ -439,7 +429,6 @@ router.post("/otplogin", (req, res) => {
       if (response.valid) {
         userhelper.otpLogin(signup_body.number).then((userData) => {
           req.session.user = userData
-          console.log(req.session.user);
           req.session.userloggedIn = true
           res.redirect("/");
         })
@@ -476,7 +465,7 @@ router.get('/order-history', async (req, res) => {
     user = req.session.user
     res.render('user/orders', { layout: 'user/user', user: req.session.user, orderhistory, catagory, cartcount, user })
   }
-  res.render('user/orders', { layout: 'user/user', user: req.session.user, orderhistory, catagory,cartcount })
+  res.render('user/orders', { layout: 'user/user', user: req.session.user, orderhistory, catagory, cartcount })
 })
 
 //ordered product detail
@@ -489,7 +478,7 @@ router.get('/view-order-products/:id', async (req, res) => {
       cartcount = await userhelper.getcartcount(req.session.user._id)
       res.render('user/orderproductdetail', { layout: 'user/user', user: req.session.user._id, products, catagory, cartcount, user })
     }
-    res.render('user/orderproductdetail', { layout: 'user/user', user: req.session.user._id, products, catagory ,cartcount})
+    res.render('user/orderproductdetail', { layout: 'user/user', user: req.session.user._id, products, catagory, cartcount })
   })
 })
 
@@ -504,7 +493,7 @@ router.get('/cancel-order/:id', async (req, res) => {
 router.get('/add-to-wishlist/:id', (req, res) => {
   if (req.session.user) {
     userhelper.addtowishlist(req.params.id, req.session.user._id).then((response) => {
-      if (response.productpresent) { 
+      if (response.productpresent) {
         res.json({ status: true, user: true })
 
       } else {
@@ -586,7 +575,7 @@ router.post('/editprofile/:id', (req, res) => {
 
 
 
-
+//sending the edit profile data
 router.post('/edited-profile/:id', (req, res) => {
   userhelpers.seteditprofile(req.params.id, req.body).then((id) => {
     if (req.files) {
@@ -603,10 +592,6 @@ router.post('/edited-profile/:id', (req, res) => {
     }
   })
 })
-
-
-
-
 
 //add new address form
 router.get('/add-address', (req, res) => {
@@ -687,7 +672,6 @@ router.post('/verify-payment', (req, res) => {
     })
 
   }).catch((err) => {
-    console.log(err)
     res.json({ status: false, errmsg: '' })
   })
 })
