@@ -22,7 +22,6 @@ paypal.configure({
 let signup_body = {}
 
 
-
 const verifylogin = (req, res, next) => {
   if (req.session.user) {
     next()
@@ -281,8 +280,8 @@ router.post('/checkout', async (req, res) => {
           "payment_method": "paypal"
         },
         "redirect_urls": {
-          "return_url": "http://newlookcom.xyz/success",
-          "cancel_url": "http://newlookcom.xyz/cancel"
+          "return_url": "https://www.newlookcom.xyz/success",
+          "cancel_url": "https://www.newlookcom.xyz/cancel"
         },
         "transactions": [{
           "item_list": {
