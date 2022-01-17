@@ -461,7 +461,7 @@ router.get('/order-history', async (req, res) => {
     user = req.session.user
     res.render('user/orders', { layout: 'user/user', user: req.session.user, orderhistory, catagory, cartcount, user })
   }
-  res.render('user/orders', { layout: 'user/user', user: req.session.user, orderhistory, catagory })
+  res.render('user/orders', { layout: 'user/user', user: req.session.user, orderhistory, catagory,cartcount })
 })
 
 //ordered product detail
@@ -474,7 +474,7 @@ router.get('/view-order-products/:id', async (req, res) => {
       cartcount = await userhelper.getcartcount(req.session.user._id)
       res.render('user/orderproductdetail', { layout: 'user/user', user: req.session.user._id, products, catagory, cartcount, user })
     }
-    res.render('user/orderproductdetail', { layout: 'user/user', user: req.session.user._id, products, catagory })
+    res.render('user/orderproductdetail', { layout: 'user/user', user: req.session.user._id, products, catagory ,cartcount})
   })
 })
 
