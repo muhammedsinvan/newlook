@@ -733,7 +733,7 @@ router.post('/applycoupen', async (req, res) => {
   totalamount = await userhelper.gettotalamount(req.session.user._id)
   validcoupen = await userhelper.checkcoupen(req.body)
   if (validcoupen) {
-    checkusecoupen = await userhelper.checkusecoupen(req.body.coupon, req.session.user._id)
+    checkusecoupen = await useverifyloginrhelper.checkusecoupen(req.body.coupon, req.session.user._id)
     if (checkusecoupen) {
       coupenused = true
       req.session.coupenused = coupenused

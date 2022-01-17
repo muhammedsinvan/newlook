@@ -11,6 +11,14 @@ const moment = require('moment')
 
 
 
+const verifylogin = (req, res, next) => {
+  if (req.session.loggedIn) {
+    next()
+  } else {
+    res.redirect('/admin')
+  }
+}
+
 /* GET users listing. */
 //login page of admin
 router.get('/', async function (req, res, next) {
@@ -26,7 +34,7 @@ router.get('/', async function (req, res, next) {
 
 
 //getting admin home page
-router.get('/admin-home', async(req, res) => {
+router.get('/admin-home',verifylogin, async(req, res) => {
   let totalusers =await adminhelper.getallusers()
   let totalorders=await adminhelper.getallorders()
   let totalsale=await adminhelper.gettotalsales()
@@ -73,7 +81,7 @@ router.post('/', (req, res) => {
       req.session.user = response.user
       res.redirect('/admin/admin-home')
     } else {
-      res.redirect('/admin/admin-login')
+      res.redirect('/admin')
       req.session.loginErr = true
     }
   })
@@ -492,8 +500,7 @@ router.get('/offer-product/:id',(req,res)=>{
 
 //logout of admin page
 router.get('/admin-logout', (req, res) => {
-  req.session.admin = null
-  req.session.loggedIn = false
+  req.session.loggedIn=false
   res.redirect('/admin')
 })
 
