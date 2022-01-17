@@ -45,7 +45,6 @@ router.get('/', async function (req, res, next) {
       userhelper.getbanner().then((banner) => {
         userhelper.getallproducts().then((products) => {
           res.render('user/home', { layout: 'user/user', products, cartcount, user, banner, brand, catagory });
-
         })
       })
     })
@@ -55,21 +54,33 @@ router.get('/', async function (req, res, next) {
 
 //login page
 router.get('/user/login', function (req, res, next) {
+  if(req.session.user){
+    res.redirect('/')
+  }else{
   res.render('user/login', { layout: 'user/user', login: true, loginErr: req.session.loginErr })
   req.session.loginErr = false
+  }
 })
 
 //signup page
 router.get('/user/signup', function (req, res, next) {
+  if(req.session.user){
+    res.redirect('/')
+  }else{
   res.render('user/signup', { layout: 'user/user', login: true, userExists: req.session.userExists })
   req.session.userExists = false
+  }
 })
 
 //otp page
 
 router.get('/user/otp', (req, res) => {
+  if(req.session.user){
+    res.redirect('/')
+  }else{
   res.render('user/otp', { layout: 'user/user', login: true, errorsignup: req.session.errorsignup })
   req.session.errorsignup = false
+  }
 })
 
 //posting signup page
@@ -379,8 +390,12 @@ router.get('/phonelogin', (req, res) => {
 
 //login otp pagereq.session.otperror=true
 router.get('/otplogin', (req, res) => {
+  if(req.session.user){
+    res.redirect('/')
+  }else{
   res.render('user/otp-login', { layout: 'user/user', login: true, otperrorone: req.session.otperrorone })
   req.session.otperrorone = false
+  }
 })
 
 
@@ -489,7 +504,7 @@ router.get('/cancel-order/:id', async (req, res) => {
 router.get('/add-to-wishlist/:id', (req, res) => {
   if (req.session.user) {
     userhelper.addtowishlist(req.params.id, req.session.user._id).then((response) => {
-      if (response.productpresent) {
+      if (response.productpresent) { 
         res.json({ status: true, user: true })
 
       } else {
