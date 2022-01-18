@@ -549,7 +549,6 @@ router.get('/edit-profile/:id', (req, res) => {
   userhelper.getprofileedit(profileid).then((prefileedit) => {
     res.render('user/editprofile', { layout: 'user/user', prefileedit })
   })
-
 })
 
 

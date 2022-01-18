@@ -79,15 +79,39 @@
                                              
                 <div class="col-12 col-sm-12 col-md-12 col-lg-12 main-col">
                     <form action="">
-                        <div class="wishlist-table table-content table-responsive">
-                                    <h3 class="card-description text-center" > All Orders   </h3>
+                        <div class="wishlist-table table-content table-responsive" id="data-print">
+                                    
                             <table class="table table-bordered" id="myTable">
+                                <h3 class="card-description text-center" > All Orders   </h3>
 
-                                <br>
-                                <br>
-                                <br>
+                              
 
-                                <br>
+                                             <div class="form-group  border-0">
+                    <form action="/admin/getdateproduct" method="post">
+                      <div class="row d-flex ms-2">
+                        <div class="col-md-3">
+                          <label for="">Start date</label>
+                          <input  type="date" class="border form-control" name="startdate" id="startdate">
+                        </div>
+                        <div class="col-md-3">
+                          <label for="">End date</label>
+
+                          <input type="date" class="border form-control" name="enddate" id="enddate"> 
+                        </div>
+                        <div class="col-md-3 d-flex align-items-end">
+
+                          <button class="btn btn-primary" type="submit">Submit</button>
+                        </div>
+                        <div>
+                            <br>
+                        <span> <button class="btn btn-primary " type="button" onclick="return print()">Download</button></span> 
+                        <span> <button class="btn btn-primary " type="button" id="exportBtn1">Download In Excel</button></span> 
+                        </div>
+                        
+                      </div>
+                    </form>
+
+                  </div>
                                 <br>
                                 <thead>
                                     <tr>
@@ -157,10 +181,79 @@
 
 </section>
 
+<script src="https://cdn.jsdelivr.net/gh/linways/table-to-excel@v1.0.4/dist/tableToExcel.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
+    integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 <script>
   $(document).ready(function () {
         $('#myTable').DataTable();
     });
+</script>
+
+
+<script>
+  function print() {
+    console.log("hey")
+    var element = document.getElementById('data-print');
+    var opt = {
+      margin: 1,
+      filename: 'Sales-report.pdf',
+      image: { type: 'jpeg', quality: 1 },
+      html2canvas: { scale: 2 },
+      jsPDF: { unit: 'in', format: 'b4', orientation: 'landscape' }
+    };
+    var worker = html2pdf().set(opt).from(element).save();
+
+  }
+</script>
+
+
+
+<script type="text/javascript">
+  $(document).ready(function () {
+      $("#exportBtn1").click(function(){
+        TableToExcel.convert(document.getElementById("myTable"), {
+            name: "Traceability.xlsx",
+            sheet: {
+            name: "Sheet1"
+            }
+          });
+        });
+  });
+</script>
+
+
+<script>
+  $(function () {
+            var dtToday = new Date();
+
+            var month = dtToday.getMonth() + 1;
+            var day = dtToday.getDate();
+            var year = dtToday.getFullYear();
+            if (month < 10)
+                month = '0' + month.toString();
+            if (day < 10)
+                day = '0' + day.toString();
+            var maxDate = year + '-' + month + '-' + day;
+            // or instead:
+            // var maxDate = dtToday.toISOString().substr(0, 10);
+            $('#startdate').attr('max', maxDate);
+        });
+          $(function () {
+            var dtToday = new Date();
+            var month = dtToday.getMonth() + 1;
+            var day = dtToday.getDate();
+            var year = dtToday.getFullYear();
+            if (month < 10)
+                month = '0' + month.toString();
+            if (day < 10)
+                day = '0' + day.toString();
+            var maxDate = year + '-' + month + '-' + day;
+            $('#enddate').attr('max', maxDate);
+        })
 </script>
 
 
