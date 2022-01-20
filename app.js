@@ -12,6 +12,8 @@ const { create } = require("express-handlebars");
 var app = express();
 var fileUpload=require('express-fileupload')
 
+
+
 //setting database connection
 var db=require('./config/connection')
 
