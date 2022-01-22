@@ -9,52 +9,6 @@ const { registerHelper } = require('hbs');
 const e = require('express');
 const moment = require('moment')
 
-// const AWS = require("aws-sdk")
-// const KEY_ID = "AKIAQZAS56M6MCD5S7OF"
-// const SECRE_KEY="GPXmrx9FOXm+PrD9TQlmIblbteCP6lp8FjvP2DVv"
-
-// const BUCKET_NAME ="image1f11s";
-// const s3 = new AWS.S3({
-//     accessKeyId: KEY_ID,
-//     secretAccessKey: SECRE_KEY,
-// });
-
-// const params = {
-//     Bucket:BUCKET_NAME
-// }
-
-// s3.createBucket(params,(err,data)=>{
-//     if(err){
-//         console.log(err)
-//     }
-//     else{
-//         console.log("Bucket created successfuly",data.Location)
-
-
-//     }
-// })
-
-
-// const uploadfile = (filename) =>{
-//     const fileContent = fs.readFileSync(filename);
-//     const params = {
-//         Bucket:BUCKET_NAME,
-//         Key:'photo.jpg',
-//         Body:fileContent,
-//         ContentType:"image/JPG"
-//     }
-   
-//     s3.upload(params,(err,data)=>{
-//         if(err){
-//             console.log(err)
-//         }
-//         else{
-//             console.log("file upload successfully".data.location)
-//         }
-//     })
-
-
-// }
 
 //checking the admin
 const verifylogin = (req, res, next) => {
