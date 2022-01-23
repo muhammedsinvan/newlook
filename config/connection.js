@@ -5,7 +5,7 @@ const state={
 }
 
 module.exports.connect=function(done){
-    const url='3.90.8.17:3001'
+    const url='34.227.86.72:3001'
     const dbname='newlook'
     
 
