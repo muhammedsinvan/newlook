@@ -5,7 +5,7 @@ const state={
 }
 
 module.exports.connect=function(done){
-    const url='34.227.86.72:3001'
+    const url='mongodb://localhost:27017'
     const dbname='newlook'
     
 
